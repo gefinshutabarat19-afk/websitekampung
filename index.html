@@ -18,15 +18,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
         body { background: #f0f2f5; min-height: 100vh; display: flex; overflow-x: hidden; }
 
-        /* --- SIDEBAR STYLE (GRADIENT DARK) --- */
+        /* --- SIDEBAR STYLE --- */
         .sidebar {
             width: 280px; background: var(--grad-sidebar); color: white; padding: 20px 0;
             position: fixed; left: 0; top: 0; height: 100%; overflow-y: auto; z-index: 1000;
             transition: 0.3s ease; box-shadow: 4px 0 15px rgba(0,0,0,0.3);
         }
         .sidebar-brand { 
-            text-align: center; font-weight: 800; padding: 25px; font-size: 1.3rem; 
-            letter-spacing: 2px; background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-align: center; font-weight: 800; padding: 25px; font-size: 1.1rem; 
+            letter-spacing: 1px; background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .menu-label { font-size: 0.7rem; color: #5d6d7e; text-transform: uppercase; padding: 20px 25px 10px; font-weight: bold; letter-spacing: 2px; }
         .sidebar ul { list-style: none; }
@@ -59,7 +59,7 @@
             display: flex; align-items: center; gap: 8px; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
         }
 
-        /* --- STATS (ESTETIK GRADIENT) --- */
+        /* --- STATS --- */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 35px; }
         .stat-card { 
             padding: 25px; border-radius: 20px; color: white; min-height: 150px; 
@@ -88,26 +88,22 @@
             font-size: 0.9rem; transition: 0.3s; background: #f8fafc;
         }
         input:focus, select:focus { outline: none; border-color: #6a11cb; box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.1); }
-        
         .btn-submit { 
             background: var(--accent-grad); color: white; padding: 16px; border: none; 
             border-radius: 12px; width: 100%; cursor: pointer; font-weight: 700; 
             font-size: 1rem; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(106, 17, 203, 0.2);
             transition: 0.3s;
         }
-        .btn-submit:hover { opacity: 0.9; transform: scale(1.01); }
 
         /* --- TABLE --- */
         .table-container { overflow-x: auto; width: 100%; border-radius: 15px; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; }
         table th { background: #f1f4f8; padding: 18px; color: #2c3e50; font-weight: 700; text-align: left; font-size: 0.85rem; }
         table td { padding: 18px; border-bottom: 1px solid #f1f4f8; font-size: 0.85rem; color: #5d6d7e; }
-        tr:hover { background-color: #fcfdfe; }
 
-        /* --- LOGIN PAGE (GAMBAR BACKGROUND & TANPA GRADIENT) --- */
+        /* --- LOGIN PAGE --- */
         #login-page {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            /* Mengganti var(--grad-main) dengan gambar background */
             background: url('https://pbs.twimg.com/media/B4YaZgoCAAAkkFQ.jpg') no-repeat center center fixed; 
             background-size: cover; 
             display: flex; justify-content: center; align-items: center; z-index: 2000;
@@ -116,10 +112,30 @@
             background: white; padding: 50px 40px; border-radius: 30px; width: 90%; 
             max-width: 420px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
-        #auth-tabs button { transition: 0.3s; font-size: 0.9rem; letter-spacing: 1px; }
-        .forgot-link { display: block; margin-top: 25px; font-size: 0.85rem; color: #01021c; font-weight: 600; text-decoration: none; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- TIMELINE SEJARAH ESTETIK --- */
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0; }
+        .timeline::after {
+            content: ''; position: absolute; width: 4px; background-color: #e0e6ed;
+            top: 0; bottom: 0; left: 40px; margin-left: -2px; border-radius: 10px;
+        }
+        .timeline-item { padding: 10px 40px; position: relative; width: 100%; margin-bottom: 30px; }
+        .timeline-dot {
+            position: absolute; width: 45px; height: 45px; left: 17px; background: white;
+            border: 4px solid #2575fc; top: 15px; border-radius: 50%; z-index: 1;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: #2575fc;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .timeline-content {
+            padding: 25px; background: white; border-radius: 20px; margin-left: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); transition: 0.3s;
+        }
+        .timeline-content:hover { transform: translateX(10px); box-shadow: 0 15px 35px rgba(37, 117, 252, 0.1); }
+        .timeline-content h3 { color: #6a11cb; font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
+        .timeline-content p { font-size: 0.88rem; line-height: 1.6; color: #5d6d7e; }
+        .highlight { font-weight: bold; color: #2c3e50; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .sidebar { left: -280px; }
             .sidebar.mobile-active { left: 0; }
@@ -127,13 +143,13 @@
             .btn-menu-mobile { display: block; }
             .stats-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; gap: 15px; }
-            .header-bar { padding: 12px 20px; }
+            .timeline::after { left: 30px; }
+            .timeline-dot { left: 7px; }
         }
 
         .content-section { display: none; }
         .active-section { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 900; backdrop-filter: blur(4px); }
         .overlay.active { display: block; }
     </style>
@@ -147,7 +163,7 @@
             <div style="background: var(--accent-grad); width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                 <i class="fas fa-university" style="font-size: 2rem; color: white;"></i>
             </div>
-            <h2 id="auth-title" style="color: #2c3e50; margin-bottom: 30px; font-size: 1.4rem;">SISTEM INFORMASI <br> DESA SIRAJAOLOAN</h2>
+            <h2 id="auth-title" style="color: #2c3e50; margin-bottom: 30px; font-size: 1.2rem;">SISTEM INFORMASI <br> DESA SIRAJAOLOAN</h2>
             
             <div id="auth-tabs" style="display: flex; border-bottom: 2px solid #f0f2f5; margin-bottom: 30px;">
                 <button onclick="switchAuth('login')" id="t-login" style="flex:1; padding:15px; border:none; background:none; cursor:pointer; font-weight:bold; border-bottom: 3px solid #6a11cb; color: #6a11cb;">LOGIN</button>
@@ -158,7 +174,7 @@
                 <input type="text" placeholder="Username / NIK" required style="margin-bottom:18px;">
                 <input type="password" placeholder="Password" required style="margin-bottom:18px;">
                 <button type="submit" class="btn-submit">MASUK KE SISTEM</button>
-                <a class="forgot-link" onclick="switchAuth('forgot')">Lupa kata sandi?</a>
+                <a class="forgot-link" onclick="switchAuth('forgot')" style="display:block; margin-top:20px; font-size:0.8rem; cursor:pointer; color:#666;">Lupa kata sandi?</a>
             </form>
 
             <form id="registerForm" style="display:none;" onsubmit="handleRegister(event)">
@@ -169,10 +185,8 @@
             </form>
 
             <form id="forgotForm" style="display:none;" onsubmit="alert('Kode reset terkirim'); switchAuth('login'); return false;">
-                <p style="font-size:0.85rem; margin-bottom:20px; color:#666; line-height: 1.5;">Masukkan NIK Anda untuk memulihkan akses akun.</p>
                 <input type="number" placeholder="Masukkan NIK Terdaftar" required style="margin-bottom:20px;">
                 <button type="submit" class="btn-submit">KIRIM KODE PEMULIHAN</button>
-                <a class="forgot-link" onclick="switchAuth('login')">Kembali ke Login</a>
             </form>
         </div>
     </div>
@@ -194,7 +208,7 @@
                     <i class="fas fa-chevron-down caret" id="caret"></i>
                 </a>
                 <div class="dropdown-container" id="about-menu">
-                    <a onclick="showSection('sejarah')">Sejarah</a>
+                    <a onclick="showSection('sejarah')">Sejarah </a>
                     <a onclick="showSection('visi')">Visi Misi</a>
                     <a onclick="showSection('struktur')">Struktur</a>
                     <a onclick="showSection('staf')">Staf Pegawai</a>
@@ -256,7 +270,78 @@
             </div>
         </div>
 
-        <div id="sejarah" class="content-section"><div class="card"><h2>Sejarah Desa</h2><p>Desa Haidupan didirikan dengan semangat gotong royong...</p></div></div>
+        <div id="sejarah" class="content-section">
+            <div class="card">
+                <h2 style="text-align: center; margin-bottom: 40px;"><i class="fas fa-history"></i> Garis Waktu Sejarah Desa</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1700</div>
+                        <div class="timeline-content">
+                            <h3> Asal-usul Desa Sirajaoloan medan</h3>
+                            <p><span class="highlight">Cikal bakal Desa Sirajaoloan berakar kuat pada sejarah silsilah suku Batak, di mana nama desa ini 
+                                diambil dari sosok Siraja Oloan, seorang tokoh leluhur yang merupakan ayah dari enam marga besar seperti Bakkara, Sinambela, Sihite, Simanullang, Marbun, dan Sihotang. Pemukiman ini awalnya terbentuk sebagai huta atau perkampungan adat yang didirikan oleh para keturunannya saat mereka melakukan migrasi dari wilayah Bakara menuju lembah Silindung. Sebagai tanah ulayat, desa ini berfungsi sebagai pusat identitas dan
+                                 pemersatu bagi keluarga besar keturunan Siraja Oloan yang mencari lahan baru untuk bertani dan menetap.
+                                </span> <br> Seiring berjalannya waktu, wilayah ini berkembang dari pemukiman berbasis silsilah keluarga menjadi sebuah entitas administratif yang diakui secara resmi di Kecamatan Tarutung, Tapanuli Utara. Meskipun kini telah bertransformasi menjadi desa modern, nilai historisnya tetap terjaga karena kedekatannya dengan dinasti Raja Sisingamangaraja yang merupakan bagian dari garis keturunan tersebut. Hingga saat ini, Desa Sirajaoloan tidak hanya menjadi pusat aktivitas sosial dan ekonomi bagi masyarakat setempat, tetapi juga dianggap
+                                 sebagai simbol penghormatan terhadap warisan leluhur dan tatanan adat yang masih dijunjung tinggi oleh masyarakat sekitar.</span></p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1992</div>
+                        <div class="timeline-content">
+                            <h3>Pengakuan Resmi Pemerintah Terhadap Desa Siraja Oloan di Kecamatan Tarutung</h3>
+                            <p>Pengakuan resmi pemerintah terhadap Desa Siraja Oloan di Kecamatan Tarutung, Kabupaten Tapanuli Utara, secara hukum telah ditetapkan melalui regulasi nasional dan daerah sejak pembentukannya sebagai desa administratif pada sekitar tahun 1992. Sebagai entitas administratif yang sah, desa ini tercatat
+                                 dalam Kode Wilayah Kementerian Dalam Negeri (Kemendagri) dan kini beroperasi di 
+                                 bawah payung hukum <span class="highlight">Undang-Undang Nomor 6 Tahun 2014 tentang Desa</span>. Pengakuan tersebut memberikan kewenangan penuh bagi desa untuk menjalankan pemerintahan mandiri, mengelola Anggaran Dana Desa (ADD), serta mengatur hak asal-usul dan
+                                  adat istiadat setempat yang merupakan bagian dari Kenegerian Siualuompu.<span class="highlight"><br> Secara teknis,
+                                     pengakuan pemerintah ini mencakup pembagian wilayah yang terdiri dari beberapa dusun, seperti Aek Nauli</span> Haidupan, Huta Bagot, Huta Bakara, Huta Bangunan, dan Peanajagar. Terhitung sejak berlakunya otonomi desa pada tahun 2014, pemerintah daerah juga semakin mengakui peran strategis desa ini dalam pelestarian budaya dan ketahanan pangan nasional melalui berbagai program pembangunan infrastruktur serta pemberdayaan masyarakat. Dengan status resmi ini, Desa Siraja Oloan memiliki dasar hukum yang kuat
+                                      untuk menerima fasilitas negara serta memperkuat tatanan sosial berdasarkan kearifan lokal yang telah ada sejak zaman leluhur..</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1992</div>
+                        <div class="timeline-content">
+                            <h3>Proses integrasi Desa Siraja Oloan</h3>
+                            <p>Proses integrasi Desa Siraja Oloan ke dalam wilayah administratif Kota Tarutung berakar pada tatanan adat Kenegerian Siualuompu yang secara geografis terletak di Lembah Silindung. Seiring dengan perkembangan Tarutung sebagai pusat pemerintahan dan ekonomi di 
+                                Tapanuli Utara, pemukiman-pemukiman adat di sekitarnya mulai ditata secara formal untuk mendukung 
+                                perluasan wilayah urban.<span class="highlight">
+                                    Secara historis, hubungan erat antar-huta di lembah ini secara alami menyatukan denyut nadi kehidupan masyarakat Siraja Oloan dengan aktivitas pusat kota, 
+                                    baik dalam aspek sosial maupun budaya.
+                                </span> Secara hukum, Desa Siraja Oloan resmi bergabung dan dikukuhkan sebagai entitas administratif mandiri di bawah naungan Kecamatan Tarutung pada sekitar tahun 1992. Penggabungan formal ini dilakukan melalui kebijakan penataan wilayah pemerintah daerah guna mempertegas batas fisik dan mempercepat pelayanan publik bagi masyarakat desa. Hingga saat ini, integrasi tersebut semakin diperkuat dengan pembangunan infrastruktur yang menghubungkan dusun-dusun seperti Haidupan dan Peanajagar 
+                                langsung ke pusat kota, menjadikan Desa Siraja Oloan bagian tak terpisahkan dari identitas dan kemajuan Kota Tarutung.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: #f5af19; color: #f5af19;">1987</div>
+                        <div class="timeline-content" style="border-left: 5px solid #f5af19;">
+                            <h3>Kelahiran Institut Teknologi TD Pardede</h3>
+                            <p>Dibuka <span class="highlight">Institut Teknologi TD Pardede (ITP)</span> pada <span class="highlight">1 Juni 1987</span> sebagai visi memajukan teknologi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: #f12711; color: #f12711;">1989</div>
+                        <div class="timeline-content" style="border-left: 5px solid #f12711;">
+                            <h3>Perubahan Nama Menjadi ISTP</h3>
+                            <p>Ditetapkan menjadi <span class="highlight">ISTP (Institut Sains dan Teknologi TD Pardede)</span> melalui SK Depdikbud pada <span class="highlight">19 Juni 1989</span>.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1990</div>
+                        <div class="timeline-content">
+                            <h3>Kerjasama dengan ITB</h3>
+                            <p>ISTP mengadakan kerjasama strategis dengan <span class="highlight">Institut Teknologi Bandung (ITB)</span> untuk peningkatan mutu pengajaran.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: #38ef7d; color: #11998e;">2025</div>
+                        <div class="timeline-content" style="border-left: 5px solid #38ef7d;">
+                            <h3>Digitalisasi Desa (Web Di Buat)</h3>
+                            <p>Peluncuran <span class="highlight">Sistem Informasi Desa Haidupan</span> sebagai langkah modernisasi pelayanan masyarakat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="visi" class="content-section"><div class="card"><h2>Visi & Misi</h2><p>Mewujudkan desa yang mandiri dan digitalisasi pelayanan...</p></div></div>
         <div id="struktur" class="content-section"><div class="card"><h2>Struktur Desa</h2><p>Bagan Organisasi Pemerintahan Desa...</p></div></div>
         <div id="staf" class="content-section"><div class="card"><h2>Staf Pegawai</h2><p>Profil para pelayan masyarakat...</p></div></div>
@@ -275,26 +360,17 @@
             const tLogin = document.getElementById('t-login');
             const tReg = document.getElementById('t-reg');
 
-            loginForm.style.display = 'none';
-            regForm.style.display = 'none';
-            forgotForm.style.display = 'none';
+            loginForm.style.display = 'none'; regForm.style.display = 'none'; forgotForm.style.display = 'none';
             tabs.style.display = 'flex';
-            tLogin.style.borderBottom = "none";
-            tReg.style.borderBottom = "none";
-            tLogin.style.color = "#7f8c8d";
-            tReg.style.color = "#7f8c8d";
+            tLogin.style.borderBottom = "none"; tReg.style.borderBottom = "none";
+            tLogin.style.color = "#7f8c8d"; tReg.style.color = "#7f8c8d";
 
             if (type === 'login') {
-                loginForm.style.display = 'block';
-                tLogin.style.borderBottom = "3px solid #6a11cb";
-                tLogin.style.color = "#6a11cb";
+                loginForm.style.display = 'block'; tLogin.style.borderBottom = "3px solid #6a11cb"; tLogin.style.color = "#6a11cb";
             } else if (type === 'reg') {
-                regForm.style.display = 'block';
-                tReg.style.borderBottom = "3px solid #6a11cb";
-                tReg.style.color = "#6a11cb";
+                regForm.style.display = 'block'; tReg.style.borderBottom = "3px solid #6a11cb"; tReg.style.color = "#6a11cb";
             } else if (type === 'forgot') {
-                forgotForm.style.display = 'block';
-                tabs.style.display = 'none';
+                forgotForm.style.display = 'block'; tabs.style.display = 'none';
             }
         }
 
