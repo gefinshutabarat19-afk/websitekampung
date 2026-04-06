@@ -288,12 +288,98 @@
     .node-item { width: 90%; }
 }
 
+
+/* --- MODAL FOTO STAF --- */
+.modal-staf {
+    display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);
+    justify-content: center; align-items: center; flex-direction: column;
+}
+.modal-content-staf {
+    max-width: 80%; max-height: 70%; border-radius: 20px; box-shadow: 0 0 30px rgba(255,255,255,0.2);
+    margin-bottom: 20px; animation: zoom 0.3s;
+}
+@keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+.close-modal {
+    position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer;
+}
+.btn-download-staf {
+    background: var(--accent-grad); color: white; border: none; padding: 12px 25px;
+    border-radius: 10px; cursor: pointer; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px;
+}
+
+
+/* --- MODERN CONTACT DESIGN --- */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.help-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    border: 1px solid #eef2f6;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.help-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: #6a11cb;
+}
+
+.icon-wrapper {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.wa-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #25d366;
+    color: white !important;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.wa-link:hover {
+    background: #128c7e;
+    transform: scale(1.02);
+}
+
+.notice-box {
+    background: linear-gradient(135deg, #fff9db 0%, #fff3bf 100%);
+    padding: 20px;
+    border-radius: 18px;
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+
     </style>
 </head>
 <body>
-
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
     <div id="login-page">
         <div class="login-card">
             <div style="background: var(--accent-grad); width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
@@ -407,7 +493,7 @@
         </div>
 
     
-<div id="sejarah" class="content-section">
+        <div id="sejarah" class="content-section">
             <div class="card">
                 <h2 style="text-align: center; margin-bottom: 40px;"><i class="fas fa-history"></i> Garis Waktu Sejarah Desa</h2>
                 <div class="timeline">
@@ -500,8 +586,8 @@
         </div>
 
         <div class="galeri-title-section">
-            <h2 class="galeri-title">GALERI DESA SIRAJA OLOAN</h2>
-            <p class="galeri-subtitle">Dokumentasi pembangunan, kegiatan sosial, dan suasana Desa Siraja Oloan</p>
+            <h3 class="galeri-title">GALERI DESA SIRAJA OLOAN</h3>
+            <p class="galeri-subtitle"><i>Dokumentasi pembangunan, kegiatan sosial, dan suasana Desa Siraja Oloan</i></p>
         </div>
         <div class="galeri-grid">
             <div class="galeri-card">
@@ -623,8 +709,8 @@
         <div id="struktur" class="content-section">
     <div class="struktur-wrapper">
         <div class="header-section" style="text-align: center; margin-bottom: 40px;">
-            <h1 style="color: #24243e; font-size: 2rem;">Struktur Pemerintah Desa</h1>
-            <p style="color: #666;">Desa Siraja Oloan, Kec. Tarutung, Kab. Tapanuli Utara</p>
+            <h3 style="color: #24243e; font-size: 2rem;">STRUKTUR PEMERINTAHAN DESA</h3>
+            <p style="color: #666;"><i>Desa Siraja Oloan, Kec. Tarutung, Kab. Tapanuli Utara</i></p>
             <hr style="width: 50px; border: 2px solid #6a11cb; margin: 15px auto;">
         </div>
 
@@ -674,7 +760,6 @@
                 </li>
             </ul>
         </div>
-        
         <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 30px;">
             <i class="fas fa-info-circle"></i> Klik pada kotak nama untuk mengubah. Data tersimpan otomatis.
         </p>
@@ -682,69 +767,92 @@
 </div>
 
 
-<section id="pegawai" class="content-section">
-    <div class="section-header">
-        <h1>Aparatur Desa Sirajaoloan</h1>
-        <p>Manajemen data internal perangkat desa.</p>
-    </div>
 
-    <div style="margin-bottom: 25px; display: flex; justify-content: flex-end;">
-        <button class="btn-main" onclick="bukaModalStaff()">
-            <i class="fas fa-plus"></i> Tambah Staff Baru
-        </button>
-    </div>
-
-    <div class="staff-layout-grid" id="staffGridContainer">
+<div id="staf" class="content-section">
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <div class="section-header" style="margin-bottom: 0;">
+                <div class="accent-line"></div>
+                <h2>DAFTAR STAF & PERANGKAT DESA</h2>
+            </div>
         </div>
-</section>
 
-       <section id="pegawai" class="content-section">
-    <div class="section-header" style="text-align: center; margin-bottom: 40px;">
-        <h1 style="font-size: 2.2rem; color: #24243e;">Aparatur Desa Sirajaoloan</h1>
-        <p style="color: #666;">Pimpinan dan Staf Administrasi Pemerintahan Desa</p>
-    </div>
-
-    <div style="margin-bottom: 30px; display: flex; justify-content: flex-end;">
-        <button class="btn-main" onclick="bukaModalStaff()">
-            <i class="fas fa-user-plus"></i> Tambah Data Pegawai
-        </button>
-    </div>
-
-    <div class="staff-private-grid" id="staffContainer">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr style="background: #f1f4f8;">
+                        <th>Foto (Klik untuk Lihat)</th>
+                        <th>Nama Lengkap</th>
+                        <th>Jabatan / Bagian</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="staf-list-content">
+                    </tbody>
+            </table>
         </div>
-</section>
+    </div>
+</div>
+        <div id="modalFotoStaf" class="modal-staf">
+            <span class="close-modal" onclick="tutupModalStaf()">&times;</span>
+                <img class="modal-content-staf" id="imgBesarStaf">
+                    <a id="linkDownloadStaf" download="Foto_Staf_Desa.png" class="btn-download-staf">
+                        <i class="fas fa-download"></i> SIMPAN FOTO KE PERANGKAT </a>
+        </div>
 
-<div id="modalStaff" class="modal" style="display:none; align-items:center; justify-content:center;">
-    <div class="modal-body" style="width: 400px; border-radius: 20px;">
-        <h3 style="margin-bottom: 20px; color: #6a11cb;">Input Data Staff</h3>
-        <form id="formStaff" onsubmit="simpanDataStaff(event)">
-            <div class="form-group">
-                <label>Foto Pegawai</label>
-                <input type="file" id="stf-input-foto" accept="image/*">
+
+
+<div id="kontak" class="content-section">
+    <div class="card">
+        <div class="section-header">
+            <div class="accent-line"></div>
+                <h2>PUSAT BANTUAN DIGITAL</h2>
+        </div>
+        <p style="color: #64748b; line-height: 1.6; margin-bottom: 30px;">
+            Kami siap membantu Anda. Jika Anda menemukan kendala teknis, kesulitan akses akun, atau membutuhkan informasi administrasi, silakan hubungi kanal resmi kami di bawah ini.
+        </p>
+        <div class="contact-container">
+            <div class="help-card">
+                <div class="icon-wrapper" style="background: rgba(106, 17, 203, 0.1); color: #6a11cb;">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3 style="color: #1e293b; margin-bottom: 12px;">Pemulihan Akun & Sandi</h3>
+                <p style="font-size: 0.88rem; color: #64748b; min-height: 45px;">
+                    Layanan khusus jika Anda lupa kata sandi atau mengalami masalah saat masuk ke sistem informasi desa.
+                </p>
+                <a href="https://wa.me/qr/6VZGEINQF7G7B1" 
+                   target="_blank" class="wa-link">
+                    <i class="fab fa-whatsapp"></i> Hubungi Admin Sistem
+                </a>
             </div>
-            <div class="form-group">
-                <label>Nama & Gelar</label>
-                <input type="text" id="stf-input-nama" required placeholder="Contoh: Budi, S.T.">
+
+            <div class="help-card">
+                <div class="icon-wrapper" style="background: rgba(37, 117, 252, 0.1); color: #2575fc;">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 style="color: #1e293b; margin-bottom: 12px;">Informasi Layanan Desa</h3>
+                <p style="font-size: 0.88rem; color: #64748b; min-height: 45px;">
+                    Tanyakan prosedur pengajuan surat, persyaratan dokumen, atau kendala operasional desa lainnya.
+                </p>
+                <a href="https://wa.me/6281234567890?text=Halo%20Layanan%20Desa,%20saya%20ingin%20bertanya%20mengenai%20prosedur%20pelayanan." 
+                   target="_blank" class="wa-link" style="background: #2575fc;">
+                    <i class="fab fa-whatsapp"></i> Chat Layanan Publik
+                </a>
             </div>
-            <div class="form-group">
-                <label>Jabatan</label>
-                <input type="text" id="stf-input-jabatan" required placeholder="Contoh: Sekretaris Desa">
+        </div>
+        <div class="notice-box">
+            <i class="fas fa-info-circle" style="color: #f59f00; font-size: 1.2rem; margin-top: 3px;"></i>
+            <div>
+                <strong style="color: #856404; display: block; margin-bottom: 4px;">Informasi Waktu Pelayanan</strong>
+                <p style="font-size: 0.85rem; color: #92400e; margin: 0;">
+                    Admin aktif pada hari kerja: <strong>Senin - Jumat (08.00 - 16.00 WIB)</strong>. Kami akan merespons pesan Anda secepat mungkin sesuai urutan antrean.
+                </p>
             </div>
-            <div class="form-group">
-                <label>NIP / NIAP</label>
-                <input type="text" id="stf-input-nip" placeholder="Isi - jika tidak ada">
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 25px;">
-                <button type="submit" class="btn-main" style="flex:1">Simpan</button>
-                <button type="button" class="btn-main" style="background:#666; flex:1" onclick="tutupModalStaff()">Batal</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-        
-        <div id="kontak" class="content-section"><div class="card"><h2>Kontak Resmi</h2><p>Hubungi: 0812-xxxx-xxxx</p></div></div>
-    </div>
 
     <script>
         let db = [];
@@ -996,6 +1104,102 @@ function muatStruktur() {
     }
 }
 
+// Data Awal 10 Pegawai
+    let dataStaf = [
+        {id: 1, nama: "Pesta Pandiangan", jabatan: "Kepala Desa", status: "Aktif", bg: "6a11cb"},
+        {id: 2, nama: "Desa Tinanda Sihite", jabatan: "Sekretaris Desa", status: "Aktif", bg: "2575fc"},
+        {id: 3, nama: "Budi Santoso", jabatan: "KAUR Keuangan", status: "Aktif", bg: "00d2ff"},
+        {id: 4, nama: "Siti Aminah", jabatan: "KAUR Umum", status: "Aktif", bg: "3a1c71"},
+        {id: 5, nama: "Hendrawan", jabatan: "KASI Pemerintahan", status: "Aktif", bg: "11998e"},
+        {id: 6, nama: "Lestari Putri", jabatan: "KASI Kesejahteraan", status: "Aktif", bg: "f12711"},
+        {id: 7, nama: "Rian Hidayat", jabatan: "KASI Pelayanan", status: "Aktif", bg: "f5af19"},
+        {id: 8, nama: "Agus Wijaya", jabatan: "Kepala Dusun I", status: "Aktif", bg: "2c3e50"},
+        {id: 9, nama: "Dewi Sartika", jabatan: "Kepala Dusun II", status: "Tidak Aktif", bg: "7f8c8d"},
+        {id: 10, nama: "Iwan Fals", jabatan: "Staf Administrasi", status: "Aktif", bg: "e53935"}
+    ];
+
+    function renderStaf() {
+        const container = document.getElementById('staf-list-content');
+        container.innerHTML = dataStaf.map((s, index) => {
+            const photoUrl = `https://ui-avatars.com/api/?name=${s.nama.split(' ').join('+')}&background=${s.bg}&color=fff&size=512&bold=true`;
+            return `
+                <tr id="row-${index}" style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px;">
+                        <img src="${photoUrl}" onclick="bukaModalStaf('${photoUrl}', '${s.nama}')" 
+                             style="width:45px; height:45px; border-radius:10px; cursor:pointer; transition:0.3s;" title="Klik untuk simpan">
+                    </td>
+                    <td style="padding: 12px;">
+                        <span class="view-mode-${index}" style="font-weight: bold; color: #2c3e50;">${s.nama}</span>
+                        <input type="text" class="edit-input edit-mode-${index}" id="edit-nama-${index}" value="${s.nama}" style="display:none;">
+                    </td>
+                    <td style="padding: 12px;">
+                        <span class="view-mode-${index}">${s.jabatan}</span>
+                        <input type="text" class="edit-input edit-mode-${index}" id="edit-jabatan-${index}" value="${s.jabatan}" style="display:none;">
+                    </td>
+                    <td style="padding: 12px;">
+                        <span class="view-mode-${index} status-badge" style="background:${s.status==='Aktif'?'#e3fcef':'#fff1f0'}; color:${s.status==='Aktif'?'#00a854':'#f5222d'};">
+                            ${s.status}
+                        </span>
+                        <select class="edit-input edit-mode-${index}" id="edit-status-${index}" style="display:none;">
+                            <option value="Aktif" ${s.status==='Aktif'?'selected':''}>Aktif</option>
+                            <option value="Tidak Aktif" ${s.status==='Tidak Aktif'?'selected':''}>Tidak Aktif</option>
+                        </select>
+                    </td>
+                    <td style="padding: 12px; text-align: center;">
+                        <div class="view-mode-${index}">
+                            <button onclick="toggleEdit(${index}, true)" style="color:#6a11cb; border:none; background:none; cursor:pointer; margin-right:10px;"><i class="fas fa-edit"></i></button>
+                            <button onclick="hapusStaf(${index})" style="color:#f5222d; border:none; background:none; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="edit-mode-${index}" style="display:none;">
+                            <button onclick="simpanEdit(${index})" style="color:#00a854; border:none; background:none; cursor:pointer; margin-right:10px;"><i class="fas fa-check"></i></button>
+                            <button onclick="toggleEdit(${index}, false)" style="color:#7f8c8d; border:none; background:none; cursor:pointer;"><i class="fas fa-times"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // Fungsi Toggle Edit
+    function toggleEdit(index, isEdit) {
+        const viewElements = document.querySelectorAll(`.view-mode-${index}`);
+        const editElements = document.querySelectorAll(`.edit-mode-${index}`);
+        viewElements.forEach(el => el.style.display = isEdit ? 'none' : 'inline-block');
+        editElements.forEach(el => el.style.display = isEdit ? 'inline-block' : 'none');
+    }
+
+    // Fungsi Simpan
+    function simpanEdit(index) {
+        dataStaf[index].nama = document.getElementById(`edit-nama-${index}`).value;
+        dataStaf[index].jabatan = document.getElementById(`edit-jabatan-${index}`).value;
+        dataStaf[index].status = document.getElementById(`edit-status-${index}`).value;
+        renderStaf();
+        alert("Data staf berhasil diperbarui!");
+    }
+
+    // Fungsi Hapus
+    function hapusStaf(index) {
+        if(confirm("Hapus data pegawai ini?")) {
+            dataStaf.splice(index, 1);
+            renderStaf();
+        }
+    }
+
+    // Fungsi Modal Foto
+    function bukaModalStaf(url, nama) {
+        const modal = document.getElementById('modalFotoStaf');
+        const img = document.getElementById('imgBesarStaf');
+        const dl = document.getElementById('linkDownloadStaf');
+        modal.style.display = "flex";
+        img.src = url;
+        dl.href = url;
+        dl.download = `Foto_${nama.replace(/\s+/g, '_')}.png`;
+    }
+
+    function tutupModalStaf() { document.getElementById('modalFotoStaf').style.display = "none"; }
+
+    // Inisialisasi
+    document.addEventListener("DOMContentLoaded", renderStaf);
     </script>
 </body>
 </html>
