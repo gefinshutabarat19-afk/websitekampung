@@ -152,6 +152,99 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 900; backdrop-filter: blur(4px); }
         .overlay.active { display: block; }
+
+              /* Card Container dengan Soft Shadow */
+.card-content {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f3f9;
+}
+
+/* Judul dengan Aksen Arsitektural */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.accent-line {
+    width: 60px;
+    height: 6px;
+    background: linear-gradient(90deg, #4e73df, #224abe);
+    border-radius: 10px;
+}
+
+/* Box Visi - Premium Look */
+.visi-box {
+    position: relative;
+    padding: 30px;
+    background: linear-gradient(145deg, #f8f9fc, #ffffff);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    border: 1px solid #eef2f7;
+}
+
+.visi-box p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #4a5568;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+}
+
+/* Grid Misi - Modern Layout */
+.misi-container {
+    display: grid;
+    gap: 15px;
+}
+
+.misi-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #f1f3f9;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.misi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(78, 115, 223, 0.1);
+    border-color: #4e73df;
+}
+
+.misi-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(78, 115, 223, 0.1);
+    color: #4e73df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-weight: 800;
+    margin-right: 20px;
+}
+
+.misi-text {
+    font-size: 1rem;
+    color: #4a5568;
+    font-weight: 400;
+    line-height: 1.5;
+}
     </style>
 </head>
 <body>
@@ -277,7 +370,7 @@
                     <div class="timeline-item">
                         <div class="timeline-dot">1700</div>
                         <div class="timeline-content">
-                            <h3> Asal-usul Desa Sirajaoloan Kec. Tarutung</h3>
+                            <h3> Asal-usul Desa Sirajaoloan medan</h3>
                             <p><span class="highlight">Cikal bakal Desa Sirajaoloan berakar kuat pada sejarah silsilah suku Batak, di mana nama desa ini 
                                 diambil dari sosok Siraja Oloan, seorang tokoh leluhur yang merupakan ayah dari enam marga besar seperti Bakkara, Sinambela, Sihite, Simanullang, Marbun, dan Sihotang. Pemukiman ini awalnya terbentuk sebagai huta atau perkampungan adat yang didirikan oleh para keturunannya saat mereka melakukan migrasi dari wilayah Bakara menuju lembah Silindung. Sebagai tanah ulayat, desa ini berfungsi sebagai pusat identitas dan
                                  pemersatu bagi keluarga besar keturunan Siraja Oloan yang mencari lahan baru untuk bertani dan menetap.
@@ -286,18 +379,40 @@
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-dot">1992</div>
+                        <div class="timeline-dot">1860</div>
                         <div class="timeline-content">
-                            <h3>Pengakuan Resmi Pemerintah Terhadap Desa Siraja Oloan di Kecamatan Tarutung</h3>
-                            <p>Pengakuan resmi pemerintah terhadap Desa Siraja Oloan di Kecamatan Tarutung, Kabupaten Tapanuli Utara, secara hukum telah ditetapkan melalui regulasi nasional dan daerah sejak pembentukannya sebagai desa administratif pada sekitar tahun 1992. Sebagai entitas administratif yang sah, desa ini tercatat
-                                 dalam Kode Wilayah Kementerian Dalam Negeri (Kemendagri) dan kini beroperasi di 
-                                 bawah payung hukum <span class="highlight">Undang-Undang Nomor 6 Tahun 2014 tentang Desa</span>. Pengakuan tersebut memberikan kewenangan penuh bagi desa untuk menjalankan pemerintahan mandiri, mengelola Anggaran Dana Desa (ADD), serta mengatur hak asal-usul dan
-                                  adat istiadat setempat yang merupakan bagian dari Kenegerian Siualuompu.<span class="highlight"><br> Secara teknis,
-                                     pengakuan pemerintah ini mencakup pembagian wilayah yang terdiri dari beberapa dusun, seperti Aek Nauli</span> Haidupan, Huta Bagot, Huta Bakara, Huta Bangunan, dan Peanajagar. Terhitung sejak berlakunya otonomi desa pada tahun 2014, pemerintah daerah juga semakin mengakui peran strategis desa ini dalam pelestarian budaya dan ketahanan pangan nasional melalui berbagai program pembangunan infrastruktur serta pemberdayaan masyarakat. Dengan status resmi ini, Desa Siraja Oloan memiliki dasar hukum yang kuat
-                                      untuk menerima fasilitas negara serta memperkuat tatanan sosial berdasarkan kearifan lokal yang telah ada sejak zaman leluhur..</p>
+                            <h3>Sejarah kelahiran Desa Siraja Oloan di Kecamatan Tarutung</h3>
+                            <p>Sejarah kelahiran Desa Siraja Oloan di Kecamatan Tarutung, Tapanuli Utara, merupakan bagian tak terpisahkan dari dinamika migrasi besar-besaran rumpun marga Toba yang mencari lahan kehidupan baru di lembah Silindung. Secara genealogis, desa ini didirikan oleh para keturunan Si Raja Oloan—sosok leluhur yang merupakan generasi kelima dari Si Raja Batak—yang terdiri dari enam marga utama, yaitu Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang.
+                                 <span class="highlight">Proses terbentuknya pemukiman ini dimulai ketika kelompok-kelompok keluarga dari wilayah asal mereka di Samosir dan Bakkara melakukan tradisi manjae atau membuka kampung baru guna memperluas wilayah pertanian dan memperkuat eksistensi klan di luar tanah asal.
+
+                                 </span>Keberadaan desa ini secara administratif dan sosial mulai terkonsolidasi kuat pada pertengahan abad ke-19, tepatnya sekitar tahun 1860-an<span class="highlight">. Bertepatan dengan masa di mana wilayah Silindung mulai ditata secara lebih sistematis dan menjadi pusat pertemuan berbagai pengaruh sosial serta keagamaan di Tapanuli.
+                                </span>Hingga saat ini, Desa Siraja Oloan bukan sekadar unit wilayah administratif, melainkan simbol identitas kolektif yang menjaga keutuhan silsilah (Tarombo) dan nilai-nilai kearifan lokal "Oloan" yang bermakna kebijaksanaan serta kepatuhan pada tatanan adat, yang terus diwariskan oleh para leluhur kepada generasi penerus di tanah Tarutung..</p>
+                        </div>
+                    </div>
+                   <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: #f12711; color: #f12711;">1978</div>
+                        <div class="timeline-content" style="border-left: 5px solid #f12711;">
+                            <h3>Pesta Bolon dan peresmian simbol persatuan enam marga.</h3>
+                            <p>Tahun 1978 menjadi momentum paling bersejarah bagi keturunan Si Raja Oloan di Tarutung dan sekitarnya, karena pada tahun tersebut dilaksanakan
+                                <span class="highlight">Pesta Bolon (Pesta Besar) sebagai puncak dari peresmian simbol persatuan enam marga, yakni Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang.
+                                </span> Perhelatan agung ini bukan sekadar upacara seremonial, melainkan sebuah pernyataan kultural yang mengukuhkan identitas "Persada" setelah melalui proses konsolidasi panjang yang dimulai sejak awal 1970-an. Melalui pembangunan tugu dan monumen pemersatu ini, masyarakat di Desa Siraja Oloan berhasil menyatukan visi silsilah (Tarombo) mereka ke dalam satu wadah fisik yang melambangkan kekuatan persaudaraan sedarah (dongan tubu).
+                                 <span class="highlight">Pesta yang dihadiri oleh ribuan keturunan dari berbagai penjuru perantauan ini menandai berakhirnya ego sektoral antar-marga dan dimulainya era baru di mana keenam marga tersebut bersepakat untuk saling menopang dalam satu atap kepemimpinan adat yang bijaksana, sesuai dengan makna nama leluhur mereka, "Oloan", yang berarti seia sekata dan ditaati.
+                                 </span>Hingga saat ini, warisan peristiwa tahun 1978 tersebut tetap berdiri kokoh sebagai pengingat bagi generasi muda di Tarutung akan pentingnya menjaga keutuhan rumpun keluarga di tengah arus modernisasi.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: #f5af19; color: #f5af19;">1992</div>
+                        <div class="timeline-content" style="border-left: 5px solid #f5af19;">
+                            <h3>Pengakuan Resmi Pemerintah Terhadap Desa Siraja Oloan di Kecamatan Tarutung</h3>
+                            <p>Pengakuan resmi pemerintah terhadap Desa Siraja Oloan di Kecamatan Tarutung, Kabupaten Tapanuli Utara, secara hukum telah ditetapkan melalui regulasi nasional dan daerah sejak pembentukannya sebagai desa administratif pada sekitar tahun 1992. Sebagai entitas administratif yang sah, desa ini tercatat
+                                 dalam Kode Wilayah Kementerian Dalam Negeri (Kemendagri) dan kini beroperasi di bawah payung hukum 
+                                 <span class="highlight">Undang-Undang Nomor 6 Tahun 2014 tentang Desa</span> Pengakuan tersebut memberikan kewenangan penuh bagi desa untuk menjalankan pemerintahan mandiri, mengelola Anggaran Dana Desa (ADD), serta mengatur hak asal-usul dan
+                                  adat istiadat setempat yang merupakan bagian dari Kenegerian Siualuompu.<span class="highlight">Secara teknis,pengakuan pemerintah ini mencakup pembagian wilayah yang terdiri dari beberapa dusun, seperti Aek Nauli</span> Haidupan, Huta Bagot, Huta Bakara, Huta Bangunan, dan Peanajagar.
+                                </span> Terhitung sejak berlakunya otonomi desa pada tahun 2014, pemerintah daerah juga semakin mengakui peran strategis desa ini dalam pelestarian budaya dan ketahanan pangan nasional melalui berbagai program pembangunan infrastruktur serta pemberdayaan masyarakat. Dengan status resmi ini, Desa Siraja Oloan memiliki dasar hukum yang kuat
+                                      untuk menerima fasilitas negara serta memperkuat tatanan sosial berdasarkan kearifan lokal yang telah ada sejak zaman leluhur.</p>
+                        </div>
+                    </div>
+                  <div class="timeline-item">
                         <div class="timeline-dot">1992</div>
                         <div class="timeline-content">
                             <h3>Proses integrasi Desa Siraja Oloan</h3>
@@ -310,39 +425,72 @@
                                 langsung ke pusat kota, menjadikan Desa Siraja Oloan bagian tak terpisahkan dari identitas dan kemajuan Kota Tarutung.</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="border-color: #f5af19; color: #f5af19;">1987</div>
-                        <div class="timeline-content" style="border-left: 5px solid #f5af19;">
-                            <h3>Kelahiran Institut Teknologi TD Pardede</h3>
-                            <p>Dibuka <span class="highlight">Institut Teknologi TD Pardede (ITP)</span> pada <span class="highlight">1 Juni 1987</span> sebagai visi memajukan teknologi.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="border-color: #f12711; color: #f12711;">1989</div>
-                        <div class="timeline-content" style="border-left: 5px solid #f12711;">
-                            <h3>Perubahan Nama Menjadi ISTP</h3>
-                            <p>Ditetapkan menjadi <span class="highlight">ISTP (Institut Sains dan Teknologi TD Pardede)</span> melalui SK Depdikbud pada <span class="highlight">19 Juni 1989</span>.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot">1990</div>
+                     <div class="timeline-item">
+                        <div class="timeline-dot">2000</div>
                         <div class="timeline-content">
-                            <h3>Kerjasama dengan ITB</h3>
-                            <p>ISTP mengadakan kerjasama strategis dengan <span class="highlight">Institut Teknologi Bandung (ITB)</span> untuk peningkatan mutu pengajaran.</p>
+                            <h3>Era Digitalisasi Tarombo Desa Sirajaoloan Kec. Tarutung</h3>
+                            <p>Pada awal milenium tahun 2000, masyarakat Desa Siraja Oloan mulai memasuki babak baru dalam pelestarian identitas melalui digitalisasi silsilah atau Tarombo.
+                            <span class="highlight">Inisiatif ini muncul dari kesadaran generasi muda dan para perantau yang ingin memastikan bahwa garis keturunan enam marga—Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang—tetap terjaga keakuratannya di tengah arus modernisasi.
+                            </span>Jika sebelumnya silsilah hanya diturunkan secara lisan atau catatan manual, pada periode ini mulai disusun buku-buku silsilah yang lebih sistematis dan berbasis data digital, sehingga memudahkan para keturunan Si Raja Oloan di mana pun berada untuk menelusuri asal-usul dan hubungan kekerabatan mereka dengan desa asal di Tarutung.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-dot" style="border-color: #38ef7d; color: #11998e;">2025</div>
+                        <div class="timeline-dot" style="border-color: #38ef7d; color: #11998e;">2015</div>
                         <div class="timeline-content" style="border-left: 5px solid #38ef7d;">
-                            <h3>Digitalisasi Desa (Web Di Buat)</h3>
-                            <p>Peluncuran <span class="highlight">Sistem Informasi Desa Haidupan</span> sebagai langkah modernisasi pelayanan masyarakat.</p>
+                            <h3>Penguatan Identitas Kolektif Melalui Monumen Digital</h3>
+                            <p>Pada periode 2015 hingga 2020, penguatan identitas "Persada" enam marga (Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang) memasuki dimensi baru melalui pemanfaatan media sosial dan platform digital.
+                                <span class="highlight">Generasi muda Desa Siraja Oloan mulai mempopulerkan sejarah relief tugu desa ke kancah nasional melalui konten visual, yang memicu arus "pulang kampung" dan kunjungan wisata ziarah yang lebih besar dari para perantau.
+
+                                </span>Renovasi tugu pemersatu pada masa ini tidak lagi hanya fokus pada fisik beton, tetapi juga penyediaan ruang publik di sekitar monumen yang berfungsi sebagai pusat edukasi Tarombo interaktif, sehingga sejarah perjalanan leluhur dari Bakkara ke Silindung dapat dipelajari dengan mudah oleh generasi alfa melalui gawai mereka.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="visi" class="content-section"><div class="card"><h2>Visi & Misi</h2><p>Mewujudkan desa yang mandiri dan digitalisasi pelayanan...</p></div></div>
+        <div id="visi" class="content-section"><div class="card"><h2>Visi & Misi Desa Sirajaoloan Kecamatan Tarutung</h2><p></div></div>
+        <div class="card-body">
+        <div class="card-body">
+         <div class="card-content">
+    <div class="section-header">
+        <div class="accent-line"></div>
+        <h2>VISI KAMI</h2>
+    </div>
+    
+    <div class="visi-box">
+        <p>"Mewujudkan Desa Sirajaoloan yang Mandiri, Sejahtera, dan Unggul melalui Digitalisasi Pelayanan serta Penguatan Nilai Budaya Berbasis Gotong Royong."</p>
+    </div>
+
+    <div class="section-header">
+        <div class="accent-line"></div>
+        <h2>MISI DESA</h2>
+    </div>
+
+    <div class="misi-container">
+        <div class="misi-card">
+            <div class="misi-icon">01</div>
+            <div class="misi-text">Meningkatkan kualitas pelayanan publik melalui implementasi sistem informasi desa yang terintegrasi.</div>
+        </div>
+
+        <div class="misi-card">
+            <div class="misi-icon">02</div>
+            <div class="misi-text">Mendorong kemandirian ekonomi desa dengan optimalisasi potensi lokal dan pemberdayaan UMKM.</div>
+        </div>
+
+        <div class="misi-card">
+            <div class="misi-icon">03</div>
+            <div class="misi-text">Memperkuat kerukunan sosial masyarakat dengan melestarikan kearifan lokal Dalihan Na Tolu.</div>
+        </div>
+        
+        <div class="misi-card">
+            <div class="misi-icon">04</div>
+            <div class="misi-text">Mengembangkan infrastruktur desa yang merata, berkualitas, dan berbasis lingkungan.</div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
         <div id="struktur" class="content-section"><div class="card"><h2>Struktur Desa</h2><p>Bagan Organisasi Pemerintahan Desa...</p></div></div>
         <div id="staf" class="content-section"><div class="card"><h2>Staf Pegawai</h2><p>Profil para pelayan masyarakat...</p></div></div>
         <div id="galeri" class="content-section"><div class="card"><h2>Galeri Desa</h2><p>Kumpulan foto kegiatan masyarakat...</p></div></div>
