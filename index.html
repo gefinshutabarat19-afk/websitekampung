@@ -160,6 +160,134 @@
             .btn-menu-mobile { display: block; }
             .stats-grid { grid-template-columns: 1fr; }
         }
+
+        /* --- GALERI --- */
+        .galeri-layout { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .galeri-filter { display: flex; gap: 10px; margin-bottom: 20px; border-radius: 20px; background-color: white; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .filter-btn { display: flex; align-items: center; gap: 8px; border: none; padding: 10px 20px; border-radius: 15px; cursor: pointer; color: black; background-color: transparent; }
+        .filter-btn.active { background-color: var(--accent-color); color: white; }
+        
+        .galeri-title-section { width: 100%; text-align: center; margin-bottom: 30px; margin-top: 30px;}
+        .galeri-title { font-size: 2.5rem; font-weight: bold; }
+        .galeri-subtitle { font-size: 1rem; color: #7f8c8d; }
+
+        .galeri-grid { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .galeri-card { background-color: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .galeri-card:hover { transform: translateY(-5px); }
+        
+        .galeri-img-container { position: relative; width: 100%; height: 200px; background-color: #f1f4f8; overflow: hidden;}
+        .galeri-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .image-status-icon { position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.7); border-radius: 5px; color: grey; width: 20px; height: 20px; display: flex; justify-content: center; align-items: center;}
+        
+        .image-missing { position: absolute; top: 10px; color: grey; left: 10px;}
+        
+        
+        .card-details { padding: 15px; text-align: left;}
+        .card-title { font-size: 0.9rem; font-weight: bold; color: black; }
+        .card-date { font-size: 0.8rem; color: #7f8c8d; }
+        .date-icon { color: var(--accent-color); font-size: 1rem;}
+        
+        @media (max-width: 900px) { .galeri-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .galeri-grid { grid-template-columns: 1fr; } .galeri-title { font-size: 2rem;} }
+
+/* --- STRUKTUR ORGANISASI STYLING --- */
+.tree {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tree ul {
+    padding-top: 20px; 
+    position: relative;
+    transition: all 0.5s;
+    list-style: none;
+    text-align: center;
+}
+
+.tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+}
+
+/* Garis Penghubung */
+.tree li::before, .tree li::after {
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 2px solid #ccc;
+    width: 50%; height: 20px;
+}
+.tree li::after {
+    right: auto; left: 50%;
+    border-left: 2px solid #ccc;
+}
+.tree li:only-child::after, .tree li:only-child::before { display: none; }
+.tree li:only-child { padding-top: 0; }
+.tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+.tree li:last-child::before { border-right: 2px solid #ccc; border-radius: 0 5px 0 0; }
+.tree li:first-child::after { border-radius: 5px 0 0 0; }
+.tree ul ul::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 2px solid #ccc;
+    width: 0; height: 20px;
+}
+
+/* Card Styling */
+.node-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    width: 200px;
+    transition: 0.3s;
+}
+
+.node-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(106, 17, 203, 0.2);
+}
+
+.label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #6a11cb;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.node-item input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    outline: none;
+}
+
+/* Warna Khusus per Jabatan */
+.kades { border-top: 5px solid #6a11cb; width: 240px; }
+.sekdes { border-top: 5px solid #2575fc; }
+.kaur { border-top: 5px solid #00d2ff; }
+.kasi { border-top: 5px solid #3a1c71; }
+
+@media (max-width: 992px) {
+    .tree li { float: none; width: 100%; padding: 10px 0; }
+    .tree li::before, .tree li::after { display: none; }
+    .tree ul ul::before { display: none; }
+    .node-item { width: 90%; }
+}
+
     </style>
 </head>
 <body>
@@ -204,6 +332,7 @@
         <div class="menu-label">Menu Utama</div>
         <ul>
             <li><a onclick="showSection('dash')" id="link-dash" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li><a onclick="showSection('galeri')" id="link-galeri"><i class="fas fa-images"></i> Galeri Desa</a></li>
             <li><a><i class="fas fa-paper-plane"></i> Surat Masuk</a></li>
             <li><a><i class="fas fa-clipboard-check"></i> Surat Selesai</a></li>
             <li><a><i class="fas fa-users"></i> Data Penduduk</a></li>
@@ -220,7 +349,6 @@
                     <a onclick="showSection('visi')">Visi Misi</a>
                     <a onclick="showSection('struktur')">Struktur</a>
                     <a onclick="showSection('staf')">Staf Pegawai</a>
-                    <a onclick="showSection('galeri')">Galeri</a>
                     <a onclick="showSection('kontak')">Kontak</a>
                 </div>
             </li>
@@ -290,7 +418,7 @@
                             <p><span class="highlight">Cikal bakal Desa Sirajaoloan berakar kuat pada sejarah silsilah suku Batak, di mana nama desa ini 
                                 diambil dari sosok Siraja Oloan, seorang tokoh leluhur yang merupakan ayah dari enam marga besar seperti Bakkara, Sinambela, Sihite, Simanullang, Marbun, dan Sihotang. Pemukiman ini awalnya terbentuk sebagai huta atau perkampungan adat yang didirikan oleh para keturunannya saat mereka melakukan migrasi dari wilayah Bakara menuju lembah Silindung. Sebagai tanah ulayat, desa ini berfungsi sebagai pusat identitas dan
                                  pemersatu bagi keluarga besar keturunan Siraja Oloan yang mencari lahan baru untuk bertani dan menetap.
-                                </span> <br> Seiring berjalannya waktu, wilayah ini berkembang dari pemukiman berbasis silsilah keluarga menjadi sebuah entitas administratif yang diakui secara resmi di Kecamatan Tarutung, Tapanuli Utara. Meskipun kini telah bertransformasi menjadi desa modern, nilai historisnya tetap terjaga karena kedekatannya dengan dinasti Raja Sisingamangaraja yang merupakan bagian dari garis keturunan tersebut. Hingga saat ini, Desa Sirajaoloan tidak hanya menjadi pusat aktivitas sosial dan ekonomi bagi masyarakat setempat, tetapi juga dianggap
+                                </span> <br> Seiring berjalannya waktu, wilayah ini berkembang dari pemukiman berbasis silsilah keluarga menjadi sebuah entitas administratif yang diakui secara resmi di Kecamatan Tarutung, Tapanuli Utara. Meskipun kini telah bertransformasi menjadi desa modern, nilai historisnya tetap terjaga karena kedekatannya dengan dinasti Raja Sisingamangaraja yang merupakan bagian dari garis keturunan tersebut. Hingga saat ini, Desa Sirajaoloan tidak hanya menjadi pusat aktivitas sosial and ekonomi bagi masyarakat setempat, tetapi juga dianggap
                                  sebagai simbol penghormatan terhadap warisan leluhur dan tatanan adat yang masih dijunjung tinggi oleh masyarakat sekitar.</span></p>
                         </div>
                     </div>
@@ -299,20 +427,20 @@
                         <div class="timeline-content">
                             <h3>Sejarah kelahiran Desa Siraja Oloan di Kecamatan Tarutung</h3>
                             <p>Sejarah kelahiran Desa Siraja Oloan di Kecamatan Tarutung, Tapanuli Utara, merupakan bagian tak terpisahkan dari dinamika migrasi besar-besaran rumpun marga Toba yang mencari lahan kehidupan baru di lembah Silindung. Secara genealogis, desa ini didirikan oleh para keturunan Si Raja Oloan—sosok leluhur yang merupakan generasi kelima dari Si Raja Batak—yang terdiri dari enam marga utama, yaitu Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang.
-                                 <span class="highlight">Proses terbentuknya pemukiman ini dimulai ketika kelompok-kelompok keluarga dari wilayah asal mereka di Samosir dan Bakkara melakukan tradisi manjae atau membuka kampung baru guna memperluas wilayah pertanian dan memperkuat eksistensi klan di luar tanah asal.
+                                 <span class="highlight">Proses terbentuknya pemukiman ini dimulai ketika kelompok-kelompok keluarga dari wilayah asal mereka di Samosir and Bakkara melakukan tradisi manjae atau membuka kampung baru guna memperluas wilayah pertanian and memperkuat eksistensi klan di luar tanah asal.
 
-                                 </span>Keberadaan desa ini secara administratif dan sosial mulai terkonsolidasi kuat pada pertengahan abad ke-19, tepatnya sekitar tahun 1860-an<span class="highlight">. Bertepatan dengan masa di mana wilayah Silindung mulai ditata secara lebih sistematis dan menjadi pusat pertemuan berbagai pengaruh sosial serta keagamaan di Tapanuli.
-                                </span>Hingga saat ini, Desa Siraja Oloan bukan sekadar unit wilayah administratif, melainkan simbol identitas kolektif yang menjaga keutuhan silsilah (Tarombo) dan nilai-nilai kearifan lokal "Oloan" yang bermakna kebijaksanaan serta kepatuhan pada tatanan adat, yang terus diwariskan oleh para leluhur kepada generasi penerus di tanah Tarutung..</p>
+                                 </span>Keberadaan desa ini secara administratif and sosial mulai terkonsolidasi kuat pada pertengahan abad ke-19, tepatnya sekitar tahun 1860-an<span class="highlight">. Bertepatan dengan masa di mana wilayah Silindung mulai ditata secara lebih sistematis and menjadi pusat pertemuan berbagai pengaruh sosial serta keagamaan di Tapanuli.
+                                </span>Hingga saat ini, Desa Siraja Oloan bukan sekadar unit wilayah administratif, melainkan simbol identitas kolektif yang menjaga keutuhan silsilah (Tarombo) and nilai-nilai kearifan lokal "Oloan" yang bermakna kebijaksanaan serta kepatuhan pada tatanan adat, yang terus diwariskan oleh para leluhur kepada generasi penerus di tanah Tarutung..</p>
                         </div>
                     </div>
                    <div class="timeline-item">
                         <div class="timeline-dot" style="border-color: #f12711; color: #f12711;">1978</div>
                         <div class="timeline-content" style="border-left: 5px solid #f12711;">
                             <h3>Pesta Bolon dan peresmian simbol persatuan enam marga.</h3>
-                            <p>Tahun 1978 menjadi momentum paling bersejarah bagi keturunan Si Raja Oloan di Tarutung dan sekitarnya, karena pada tahun tersebut dilaksanakan
-                                <span class="highlight">Pesta Bolon (Pesta Besar) sebagai puncak dari peresmian simbol persatuan enam marga, yakni Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang.
-                                </span> Perhelatan agung ini bukan sekadar upacara seremonial, melainkan sebuah pernyataan kultural yang mengukuhkan identitas "Persada" setelah melalui proses konsolidasi panjang yang dimulai sejak awal 1970-an. Melalui pembangunan tugu dan monumen pemersatu ini, masyarakat di Desa Siraja Oloan berhasil menyatukan visi silsilah (Tarombo) mereka ke dalam satu wadah fisik yang melambangkan kekuatan persaudaraan sedarah (dongan tubu).
-                                 <span class="highlight">Pesta yang dihadiri oleh ribuan keturunan dari berbagai penjuru perantauan ini menandai berakhirnya ego sektoral antar-marga dan dimulainya era baru di mana keenam marga tersebut bersepakat untuk saling menopang dalam satu atap kepemimpinan adat yang bijaksana, sesuai dengan makna nama leluhur mereka, "Oloan", yang berarti seia sekata dan ditaati.
+                            <p>Tahun 1978 menjadi momentum paling bersejarah bagi keturunan Si Raja Oloan di Tarutung and sekitarnya, karena pada tahun tersebut dilaksanakan
+                                <span class="highlight">Pesta Bolon (Pesta Besar) sebagai puncak dari peresmian simbol persatuan enam marga, yakni Naibaho, Sihotang, Bakkara, Sinambela, Sihite, and Manullang.
+                                </span> Perhelatan agung ini bukan sekadar upacara seremonial, melainkan sebuah pernyataan kultural yang mengukuhkan identitas "Persada" setelah melalui proses konsolidasi panjang yang dimulai sejak awal 1970-an. Melalui pembangunan tugu and monumen pemersatu ini, masyarakat di Desa Siraja Oloan berhasil menyatukan visi silsilah (Tarombo) mereka ke dalam satu wadah fisik yang melambangkan kekuatan persaudaraan sedarah (dongan tubu).
+                                 <span class="highlight">Pesta yang dihadiri oleh ribuan keturunan dari berbagai penjuru perantauan ini menandai berakhirnya ego sektoral antar-marga and dimulainya era baru di mana keenam marga tersebut bersepakat untuk saling menopang dalam satu atap kepemimpinan adat yang bijaksana, sesuai dengan makna nama leluhur mereka, "Oloan", yang berarti seia sekata and ditaati.
                                  </span>Hingga saat ini, warisan peristiwa tahun 1978 tersebut tetap berdiri kokoh sebagai pengingat bagi generasi muda di Tarutung akan pentingnya menjaga keutuhan rumpun keluarga di tengah arus modernisasi.</p>
                         </div>
                     </div>
@@ -320,11 +448,11 @@
                         <div class="timeline-dot" style="border-color: #f5af19; color: #f5af19;">1992</div>
                         <div class="timeline-content" style="border-left: 5px solid #f5af19;">
                             <h3>Pengakuan Resmi Pemerintah Terhadap Desa Siraja Oloan di Kecamatan Tarutung</h3>
-                            <p>Pengakuan resmi pemerintah terhadap Desa Siraja Oloan di Kecamatan Tarutung, Kabupaten Tapanuli Utara, secara hukum telah ditetapkan melalui regulasi nasional dan daerah sejak pembentukannya sebagai desa administratif pada sekitar tahun 1992. Sebagai entitas administratif yang sah, desa ini tercatat
-                                 dalam Kode Wilayah Kementerian Dalam Negeri (Kemendagri) dan kini beroperasi di bawah payung hukum 
-                                 <span class="highlight">Undang-Undang Nomor 6 Tahun 2014 tentang Desa</span> Pengakuan tersebut memberikan kewenangan penuh bagi desa untuk menjalankan pemerintahan mandiri, mengelola Anggaran Dana Desa (ADD), serta mengatur hak asal-usul dan
-                                  adat istiadat setempat yang merupakan bagian dari Kenegerian Siualuompu.<span class="highlight">Secara teknis,pengakuan pemerintah ini mencakup pembagian wilayah yang terdiri dari beberapa dusun, seperti Aek Nauli</span> Haidupan, Huta Bagot, Huta Bakara, Huta Bangunan, dan Peanajagar.
-                                </span> Terhitung sejak berlakunya otonomi desa pada tahun 2014, pemerintah daerah juga semakin mengakui peran strategis desa ini dalam pelestarian budaya dan ketahanan pangan nasional melalui berbagai program pembangunan infrastruktur serta pemberdayaan masyarakat. Dengan status resmi ini, Desa Siraja Oloan memiliki dasar hukum yang kuat
+                            <p>Pengakuan resmi pemerintah terhadap Desa Siraja Oloan di Kecamatan Tarutung, Kabupaten Tapanuli Utara, secara hukum telah ditetapkan melalui regulasi nasional and daerah sejak pembentukannya sebagai desa administratif pada sekitar tahun 1992. Sebagai entitas administratif yang sah, desa ini tercatat
+                                 dalam Kode Wilayah Kementerian Dalam Negeri (Kemendagri) and kini beroperasi di bawah payung hukum 
+                                 <span class="highlight">Undang-Undang Nomor 6 Tahun 2014 tentang Desa</span> Pengakuan tersebut memberikan kewenangan penuh bagi desa untuk menjalankan pemerintahan mandiri, mengelola Anggaran Dana Desa (ADD), serta mengatur hak asal-usul and
+                                  adat istiadat setempat yang merupakan bagian dari Kenegerian Siualuompu.<span class="highlight">Secara teknis,pengakuan pemerintah ini mencakup pembagian wilayah yang terdiri dari beberapa dusun, seperti Aek Nauli</span> Haidupan, Huta Bagot, Huta Bakara, Huta Bangunan, and Peanajagar.
+                                </span> Terhitung sejak berlakunya otonomi desa pada tahun 2014, pemerintah daerah juga semakin mengakui peran strategis desa ini dalam pelestarian budaya and ketahanan pangan nasional melalui berbagai program pembangunan infrastruktur serta pemberdayaan masyarakat. Dengan status resmi ini, Desa Siraja Oloan memiliki dasar hukum yang kuat
                                       untuk menerima fasilitas negara serta memperkuat tatanan sosial berdasarkan kearifan lokal yang telah ada sejak zaman leluhur.</p>
                         </div>
                     </div>
@@ -332,13 +460,13 @@
                         <div class="timeline-dot">1992</div>
                         <div class="timeline-content">
                             <h3>Proses integrasi Desa Siraja Oloan</h3>
-                            <p>Proses integrasi Desa Siraja Oloan ke dalam wilayah administratif Kota Tarutung berakar pada tatanan adat Kenegerian Siualuompu yang secara geografis terletak di Lembah Silindung. Seiring dengan perkembangan Tarutung sebagai pusat pemerintahan dan ekonomi di 
+                            <p>Proses integrasi Desa Siraja Oloan ke dalam wilayah administratif Kota Tarutung berakar pada tatanan adat Kenegerian Siualuompu yang secara geografis terletak di Lembah Silindung. Seiring dengan perkembangan Tarutung sebagai pusat pemerintahan and ekonomi di 
                                 Tapanuli Utara, pemukiman-pemukiman adat di sekitarnya mulai ditata secara formal untuk mendukung 
                                 perluasan wilayah urban.<span class="highlight">
                                     Secara historis, hubungan erat antar-huta di lembah ini secara alami menyatukan denyut nadi kehidupan masyarakat Siraja Oloan dengan aktivitas pusat kota, 
                                     baik dalam aspek sosial maupun budaya.
-                                </span> Secara hukum, Desa Siraja Oloan resmi bergabung dan dikukuhkan sebagai entitas administratif mandiri di bawah naungan Kecamatan Tarutung pada sekitar tahun 1992. Penggabungan formal ini dilakukan melalui kebijakan penataan wilayah pemerintah daerah guna mempertegas batas fisik dan mempercepat pelayanan publik bagi masyarakat desa. Hingga saat ini, integrasi tersebut semakin diperkuat dengan pembangunan infrastruktur yang menghubungkan dusun-dusun seperti Haidupan dan Peanajagar 
-                                langsung ke pusat kota, menjadikan Desa Siraja Oloan bagian tak terpisahkan dari identitas dan kemajuan Kota Tarutung.</p>
+                                </span> Secara hukum, Desa Siraja Oloan resmi bergabung and dikukuhkan sebagai entitas administratif mandiri di bawah naungan Kecamatan Tarutung pada sekitar tahun 1992. Penggabungan formal ini dilakukan melalui kebijakan penataan wilayah pemerintah daerah guna mempertegas batas fisik and mempercepat pelayanan publik bagi masyarakat desa. Hingga saat ini, integrasi tersebut semakin diperkuat dengan pembangunan infrastruktur yang menghubungkan dusun-dusun seperti Haidupan and Peanajagar 
+                                langsung ke pusat kota, menjadikan Desa Siraja Oloan bagian tak terpisahkan dari identitas and kemajuan Kota Tarutung.</p>
                         </div>
                     </div>
                      <div class="timeline-item">
@@ -346,27 +474,129 @@
                         <div class="timeline-content">
                             <h3>Era Digitalisasi Tarombo Desa Sirajaoloan Kec. Tarutung</h3>
                             <p>Pada awal milenium tahun 2000, masyarakat Desa Siraja Oloan mulai memasuki babak baru dalam pelestarian identitas melalui digitalisasi silsilah atau Tarombo.
-                            <span class="highlight">Inisiatif ini muncul dari kesadaran generasi muda dan para perantau yang ingin memastikan bahwa garis keturunan enam marga—Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang—tetap terjaga keakuratannya di tengah arus modernisasi.
-                            </span>Jika sebelumnya silsilah hanya diturunkan secara lisan atau catatan manual, pada periode ini mulai disusun buku-buku silsilah yang lebih sistematis dan berbasis data digital, sehingga memudahkan para keturunan Si Raja Oloan di mana pun berada untuk menelusuri asal-usul dan hubungan kekerabatan mereka dengan desa asal di Tarutung.</p>
+                            <span class="highlight">Inisiatif ini muncul dari kesadaran generasi muda and para perantau yang ingin memastikan bahwa garis keturunan enam marga—Naibaho, Sihotang, Bakkara, Sinambela, Sihite, and Manullang—tetap terjaga keakuratannya di tengah arus modernisasi.
+                            </span>Jika sebelumnya silsilah hanya diturunkan secara lisan atau catatan manual, pada periode ini mulai disusun buku-buku silsilah yang lebih sistematis and berbasis data digital, sehingga memudahkan para keturunan Si Raja Oloan di mana pun berada untuk menelusuri asal-usul and hubungan kekerabatan mereka dengan desa asal di Tarutung.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot" style="border-color: #38ef7d; color: #11998e;">2015</div>
                         <div class="timeline-content" style="border-left: 5px solid #38ef7d;">
                             <h3>Penguatan Identitas Kolektif Melalui Monumen Digital</h3>
-                            <p>Pada periode 2015 hingga 2020, penguatan identitas "Persada" enam marga (Naibaho, Sihotang, Bakkara, Sinambela, Sihite, dan Manullang) memasuki dimensi baru melalui pemanfaatan media sosial dan platform digital.
-                                <span class="highlight">Generasi muda Desa Siraja Oloan mulai mempopulerkan sejarah relief tugu desa ke kancah nasional melalui konten visual, yang memicu arus "pulang kampung" dan kunjungan wisata ziarah yang lebih besar dari para perantau.
-
+                            <p>Pada periode 2015 hingga 2020, penguatan identitas "Persada" enam marga (Naibaho, Sihotang, Bakkara, Sinambela, Sihite, and Manullang) memasuki dimensi baru melalui pemanfaatan media sosial and platform digital.
+                                <span class="highlight">Generasi muda Desa Siraja Oloan mulai mempopulerkan sejarah relief tugu desa ke kancah nasional melalui konten visual, yang memicu arus "pulang kampung" and kunjungan wisata ziarah yang lebih besar dari para perantau.
                                 </span>Renovasi tugu pemersatu pada masa ini tidak lagi hanya fokus pada fisik beton, tetapi juga penyediaan ruang publik di sekitar monumen yang berfungsi sebagai pusat edukasi Tarombo interaktif, sehingga sejarah perjalanan leluhur dari Bakkara ke Silindung dapat dipelajari dengan mudah oleh generasi alfa melalui gawai mereka.</p>
                         </div>
                     </div>
                 </div>
             </div>
-                                    </div>
+        </div>
 
         
+        <div id="galeri" class="content-section">
+    <div class="galeri-layout">
+        <div class="galeri-filter">
+            <button class="filter-btn active"><i class="fas fa-images"></i> Galeri Foto Desa Siraja Oloan</button>
+            <button class="filter-btn"><i class="fas fa-video"></i> Galeri Video</button>
+        </div>
 
-        
+        <div class="galeri-title-section">
+            <h2 class="galeri-title">GALERI DESA SIRAJA OLOAN</h2>
+            <p class="galeri-subtitle">Dokumentasi pembangunan, kegiatan sosial, dan suasana Desa Siraja Oloan</p>
+        </div>
+        <div class="galeri-grid">
+            <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-1').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-1" hidden onchange="changeImage(this, 'img-desa-1')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Desa_Siraja_Oloan%2C_Tarutung%2C_Tapanuli_Utara.jpg/960px-Desa_Siraja_Oloan%2C_Tarutung%2C_Tapanuli_Utara.jpg" id="img-desa-1" alt="Kantor Desa">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Kantor Kepala Desa</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 10 Feb 2026</p>
+                </div>
+            </div>
+            
+            <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-2').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-2" hidden onchange="changeImage(this, 'img-desa-2')">
+                    <img src="https://cdn.digitaldesa.com/uploads/profil/32.16.14.2006/berita/01053b0bc8240f944156915c2c5f58fb.jpg" id="img-desa-2" alt="Kegiatan Warga">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Gotong Royong Kebersihan Lingkungan</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 20 Juli 2025</p>
+                </div>
+            </div>
+            <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-3').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-3" hidden onchange="changeImage(this, 'img-desa-3')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYp3NJQafnn8FV9gQ9f34I8LQdsNVqrvPwWw&s" id="img-desa-3" alt="Lahan Pertanian">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Potensi Pertanian Desa</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 29 Agustus 2022</p>
+                </div>
+            </div>
+             <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-3').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-3" hidden onchange="changeImage(this, 'img-desa-3')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYp3NJQafnn8FV9gQ9f34I8LQdsNVqrvPwWw&s" id="img-desa-3" alt="Lahan Pertanian">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Potensi Pertanian Desa</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 29 Agustus 2022</p>
+                </div>
+            </div>
+            
+            <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-4').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-4" hidden onchange="changeImage(this, 'img-desa-4')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5gd0xnJbIzc8Rkap8AXQE-VuzMqdx-ab_ug&s" id="img-desa-4" alt="Pembangunan">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Pembangunan Drainase & Jalan</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 21 April 2025</p>
+                </div>
+            </div>
+            
+            <div class="galeri-card">
+                <div class="galeri-img-container">
+                    <button class="btn-ganti-foto" onclick="document.getElementById('input-desa-5').click()">
+                        <i class="fas fa-edit"></i> Ganti
+                    </button>
+                    <input type="file" id="input-desa-5" hidden onchange="changeImage(this, 'img-desa-5')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBuGYuRO3Bw1kSrtZqgFrPkmbDZQIT0OCkQ&s" id="img-desa-5" alt="Musyawarah">
+                </div>
+                <div class="card-details">
+                    <p class="card-title">Musyawarah Perencanaan Desa</p>
+                    <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> 26 Maret 2026</p>
+                </div>
+            </div>
+        </div>
+            
+        <div class="galeri-grid" id="galeriGrid">
+         </div>
+            <div class="upload-section">
+                <input type="file" id="inputFotoBaru" hidden accept="image/*" onchange="autoTambahFoto(this)">
+                     <button class="btn-submit" onclick="document.getElementById('inputFotoBaru').click()">
+                        <i class="fas fa-plus"></i> Tambah Foto Baru
+                        </button>
+     </div>
+    </div>
+</div>
         <div id="visi" class="content-section">
             <div class="card">
                 <div class="card-content">
@@ -375,7 +605,7 @@
                         <h2>VISI KAMI</h2>
                     </div>
                     <div class="visi-box">
-                        <p>"Mewujudkan Desa Sirajaoloan yang Mandiri, Sejahtera, dan Unggul melalui Digitalisasi Pelayanan serta Penguatan Nilai Budaya Berbasis Gotong Royong."</p>
+                        <p>"Mewujudkan Desa Siraja Oloan yang Mandiri, Sejahtera, and Unggul melalui Digitalisasi Pelayanan serta Penguatan Nilai Budaya Berbasis Gotong Royong."</p>
                     </div>
                     <div class="section-header">
                         <div class="accent-line"></div>
@@ -390,9 +620,129 @@
             </div>
         </div>
 
-        <div id="struktur" class="content-section"><div class="card"><h2>Struktur Organisasi</h2><p>Bagan Pemerintahan Desa...</p></div></div>
-        <div id="staf" class="content-section"><div class="card"><h2>Staf Pegawai</h2><p>Profil pelayan masyarakat...</p></div></div>
-        <div id="galeri" class="content-section"><div class="card"><h2>Galeri Desa</h2><p>Foto kegiatan desa...</p></div></div>
+        <div id="struktur" class="content-section">
+    <div class="struktur-wrapper">
+        <div class="header-section" style="text-align: center; margin-bottom: 40px;">
+            <h1 style="color: #24243e; font-size: 2rem;">Struktur Pemerintah Desa</h1>
+            <p style="color: #666;">Desa Siraja Oloan, Kec. Tarutung, Kab. Tapanuli Utara</p>
+            <hr style="width: 50px; border: 2px solid #6a11cb; margin: 15px auto;">
+        </div>
+
+        <div class="tree">
+            <ul>
+                <li>
+                    <div class="node-item kades">
+                        <span class="label">Kepala Desa</span>
+                        <input type="text" id="st-kades" placeholder="Pesta Pandiangan" oninput="simpanStruktur()">
+                    </div>
+                    
+                    <ul class="vertical-line">
+                        <li>
+                            <div class="node-item sekdes">
+                                <span class="label">Sekretaris Desa</span>
+                                <input type="text" id="st-sekdes" placeholder="Desa Tinanda Sihite" oninput="simpanStruktur()">
+                            </div>
+
+                            <ul class="horizontal-branch">
+                                <li>
+                                    <div class="node-item kaur">
+                                        <span class="label">KAUR Keuangan</span>
+                                        <input type="text" id="st-kaur1" placeholder="-" oninput="simpanStruktur()">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="node-item kaur">
+                                        <span class="label">KAUR Umum</span>
+                                        <input type="text" id="st-kaur2" placeholder="-" oninput="simpanStruktur()">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="node-item kasi">
+                                        <span class="label">KASI Pemerintahan</span>
+                                        <input type="text" id="st-kasi1" placeholder="Nama Pejabat" oninput="simpanStruktur()">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="node-item kasi">
+                                        <span class="label">KASI Kesra</span>
+                                        <input type="text" id="st-kasi2" placeholder="Nama Pejabat" oninput="simpanStruktur()">
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 30px;">
+            <i class="fas fa-info-circle"></i> Klik pada kotak nama untuk mengubah. Data tersimpan otomatis.
+        </p>
+    </div>
+</div>
+
+
+<section id="pegawai" class="content-section">
+    <div class="section-header">
+        <h1>Aparatur Desa Sirajaoloan</h1>
+        <p>Manajemen data internal perangkat desa.</p>
+    </div>
+
+    <div style="margin-bottom: 25px; display: flex; justify-content: flex-end;">
+        <button class="btn-main" onclick="bukaModalStaff()">
+            <i class="fas fa-plus"></i> Tambah Staff Baru
+        </button>
+    </div>
+
+    <div class="staff-layout-grid" id="staffGridContainer">
+        </div>
+</section>
+
+       <section id="pegawai" class="content-section">
+    <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+        <h1 style="font-size: 2.2rem; color: #24243e;">Aparatur Desa Sirajaoloan</h1>
+        <p style="color: #666;">Pimpinan dan Staf Administrasi Pemerintahan Desa</p>
+    </div>
+
+    <div style="margin-bottom: 30px; display: flex; justify-content: flex-end;">
+        <button class="btn-main" onclick="bukaModalStaff()">
+            <i class="fas fa-user-plus"></i> Tambah Data Pegawai
+        </button>
+    </div>
+
+    <div class="staff-private-grid" id="staffContainer">
+        </div>
+</section>
+
+<div id="modalStaff" class="modal" style="display:none; align-items:center; justify-content:center;">
+    <div class="modal-body" style="width: 400px; border-radius: 20px;">
+        <h3 style="margin-bottom: 20px; color: #6a11cb;">Input Data Staff</h3>
+        <form id="formStaff" onsubmit="simpanDataStaff(event)">
+            <div class="form-group">
+                <label>Foto Pegawai</label>
+                <input type="file" id="stf-input-foto" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Nama & Gelar</label>
+                <input type="text" id="stf-input-nama" required placeholder="Contoh: Budi, S.T.">
+            </div>
+            <div class="form-group">
+                <label>Jabatan</label>
+                <input type="text" id="stf-input-jabatan" required placeholder="Contoh: Sekretaris Desa">
+            </div>
+            <div class="form-group">
+                <label>NIP / NIAP</label>
+                <input type="text" id="stf-input-nip" placeholder="Isi - jika tidak ada">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 25px;">
+                <button type="submit" class="btn-main" style="flex:1">Simpan</button>
+                <button type="button" class="btn-main" style="background:#666; flex:1" onclick="tutupModalStaff()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+        
         <div id="kontak" class="content-section"><div class="card"><h2>Kontak Resmi</h2><p>Hubungi: 0812-xxxx-xxxx</p></div></div>
     </div>
 
@@ -452,7 +802,20 @@
             const targetLink = document.getElementById('link-' + id);
             if(targetLink) targetLink.classList.add('active');
 
-            document.getElementById('page-title').innerText = id.toUpperCase();
+            // Hide dropdown if showing sections from it
+            if(!['dash', 'galeri'].includes(id)) {
+                const menu = document.getElementById('about-menu');
+                menu.style.display = 'none';
+                document.getElementById('caret').classList.remove('rotate');
+            } else {
+                // If main sections, close dropdown
+                const menu = document.getElementById('about-menu');
+                menu.style.display = 'none';
+                document.getElementById('caret').classList.remove('rotate');
+            }
+
+
+            document.getElementById('page-title').innerText = (id === 'galeri' ? 'GALERI DESA' : id.toUpperCase());
             if(window.innerWidth <= 768) toggleSidebar();
         }
 
@@ -499,6 +862,140 @@
             document.getElementById('btnAction').innerText = "SIMPAN PERUBAHAN";
             window.scrollTo(0,0);
         }
+
+
+     // 1. Muat foto dari LocalStorage saat halaman pertama kali dibuka
+        document.addEventListener("DOMContentLoaded", function() {
+            muatGaleriDariStorage();
+            });
+
+// Fungsi untuk mengganti foto (baik foto bawaan maupun baru)
+function changeImage(input, imgId) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(imgId).src = e.target.result;
+            simpanGaleriKeStorage(); // Simpan perubahan setelah ganti foto
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// Fungsi Tambah Foto Otomatis
+function autoTambahFoto(input) {
+    if (input.files && input.files[0]) {
+        const judulFoto = prompt("Masukkan Judul Kegiatan/Foto:", "Kegiatan Desa Baru");
+        if (judulFoto === null) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const grid = document.getElementById('galeriGrid');
+            const newId = Date.now();
+            const tanggal = new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'});
+
+            const cardHTML = buatTemplateCard(newId, e.target.result, judulFoto, tanggal);
+            
+            grid.insertAdjacentHTML('beforeend', cardHTML);
+            simpanGaleriKeStorage(); // SIMPAN OTOMATIS KE BROWSER
+        };
+        reader.readAsDataURL(input.files[0]);
+        input.value = '';
+    }
+}
+
+// Fungsi pembantu untuk membuat susunan HTML Card
+function buatTemplateCard(id, src, judul, tgl) {
+    return `
+        <div class="galeri-card" data-id="${id}">
+            <div class="galeri-img-container">
+                <button class="btn-ganti-foto" onclick="document.getElementById('input-${id}').click()">
+                    <i class="fas fa-edit"></i> Ganti
+                </button>
+                <input type="file" id="input-${id}" hidden onchange="changeImage(this, 'img-${id}')">
+                <img src="${src}" id="img-${id}" alt="${judul}">
+            </div>
+            <div class="card-details">
+                <p class="card-title">${judul}</p>
+                <p class="card-date"><i class="fas fa-calendar-days date-icon"></i> ${tgl}</p>
+                <button onclick="hapusFoto(this)" style="color:red; background:none; border:none; cursor:pointer; font-size:0.7rem; margin-top:5px;">Hapus Foto</button>
+            </div>
+        </div>`;
+}
+
+// --- LOGIKA PENYIMPANAN (LOCAL STORAGE) ---
+
+function simpanGaleriKeStorage() {
+    const cards = document.querySelectorAll('#galeriGrid .galeri-card');
+    const dataGaleri = [];
+
+    cards.forEach(card => {
+        const id = card.getAttribute('data-id') || Date.now();
+        const src = card.querySelector('img').src;
+        const judul = card.querySelector('.card-title').innerText;
+        const tgl = card.querySelector('.card-date').innerText;
+        dataGaleri.push({ id, src, judul, tgl });
+    });
+
+    localStorage.setItem('galeriDesa', JSON.stringify(dataGaleri));
+}
+
+function muatGaleriDariStorage() {
+    const dataSimpanan = localStorage.getItem('galeriDesa');
+    if (dataSimpanan) {
+        const dataGaleri = JSON.parse(dataSimpanan);
+        const grid = document.getElementById('galeriGrid');
+        
+        // Bersihkan grid sebelum memuat (opsional, tergantung keinginan)
+        // grid.innerHTML = ''; 
+
+        dataGaleri.forEach(item => {
+            // Cek agar tidak menduplikasi foto bawaan yang sudah ada di HTML
+            if (!document.getElementById(`img-${item.id}`)) {
+                grid.insertAdjacentHTML('beforeend', buatTemplateCard(item.id, item.src, item.judul, item.tgl));
+            }
+        });
+    }
+}
+
+function hapusFoto(btn) {
+    if(confirm("Hapus foto ini dari galeri?")) {
+        btn.closest('.galeri-card').remove();
+        simpanGaleriKeStorage();
+    }
+}
+
+// Jalankan fungsi muat data saat halaman dibuka
+document.addEventListener("DOMContentLoaded", function() {
+    muatStruktur();
+});
+
+// Fungsi Menyimpan Data Struktur ke LocalStorage
+function simpanStruktur() {
+    const data = {
+        kades: document.getElementById('st-kades').value,
+        sekdes: document.getElementById('st-sekdes').value,
+        kaur1: document.getElementById('st-kaur1').value,
+        kaur2: document.getElementById('st-kaur2').value,
+        kasi1: document.getElementById('st-kasi1').value,
+        kasi2: document.getElementById('st-kasi2').value
+    };
+    localStorage.setItem('strukturDataSirajaoloan', JSON.stringify(data));
+}
+
+// Fungsi Memuat Data dari LocalStorage
+function muatStruktur() {
+    const saved = localStorage.getItem('strukturDataSirajaoloan');
+    if (saved) {
+        const d = JSON.parse(saved);
+        document.getElementById('st-kades').value = d.kades || "";
+        document.getElementById('st-sekdes').value = d.sekdes || "";
+        document.getElementById('st-kaur1').value = d.kaur1 || "";
+        document.getElementById('st-kaur2').value = d.kaur2 || "";
+        document.getElementById('st-kasi1').value = d.kasi1 || "";
+        document.getElementById('st-kasi2').value = d.kasi2 || "";
+    }
+}
+
     </script>
 </body>
 </html>
