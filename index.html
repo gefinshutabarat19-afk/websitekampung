@@ -376,6 +376,148 @@
 }
 
 
+/* --- MODERN WEATHER UI --- */
+.weather-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.weather-card-main {
+    background: var(--grad-main); /* Mengikuti tema gelap file Anda */
+    border-radius: 30px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.badge-lokasi {
+    background: rgba(255,255,255,0.15);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+}
+
+.weather-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.weather-temp-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.weather-icon-wrapper {
+    font-size: 5rem;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+}
+
+.temp-number { font-size: 5rem; font-weight: 700; }
+.temp-unit { font-size: 2rem; vertical-align: top; margin-top: 15px; display: inline-block; }
+.weather-desc { font-size: 1.2rem; opacity: 0.8; margin-top: -10px; }
+
+.weather-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat-box {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-box i { font-size: 1.2rem; margin-bottom: 8px; color: #4facfe; }
+.stat-box span { display: block; font-size: 0.7rem; opacity: 0.7; text-transform: uppercase; }
+.stat-box p { font-weight: 600; font-size: 1rem; margin-top: 5px; }
+
+/* Forecast Scrollable Area */
+.forecast-section h3 { margin-bottom: 15px; font-size: 1.1rem; color: #2c3e50; }
+.forecast-wrapper {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 5px 20px 5px;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.forecast-wrapper::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+
+.forecast-card {
+    min-width: 110px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+.forecast-card.active {
+    background: var(--accent-grad);
+    color: white;
+}
+
+.forecast-card i { font-size: 1.5rem; color: #2575fc; }
+.forecast-card.active i { color: white; }
+
+/* ANIMASI */
+.weather-animate {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- MEDIA QUERIES (Ini kunci agar bagus di HP) --- */
+@media (max-width: 768px) {
+    .weather-body {
+        grid-template-columns: 1fr; /* Jadi satu kolom di HP */
+        text-align: center;
+    }
+    
+    .weather-temp-section {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .temp-number { font-size: 4rem; }
+    
+    .weather-stats-grid {
+        grid-template-columns: 1fr 1fr 1fr; /* Tetap 3 kolom kecil */
+    }
+
+    .stat-box { padding: 10px; }
+    .stat-box p { font-size: 0.9rem; }
+}
+
+
     </style>
 </head>
 <body>
@@ -419,6 +561,7 @@
         <ul>
             <li><a onclick="showSection('dash')" id="link-dash" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
             <li><a onclick="showSection('galeri')" id="link-galeri"><i class="fas fa-images"></i> Galeri Desa</a></li>
+            <li><a onclick="showSection('cuaca')" id="link-cuaca"><i class="fas fa-cloud-sun"></i> Prakiraan Cuaca</a></li>
             <li><a><i class="fas fa-paper-plane"></i> Surat Masuk</a></li>
             <li><a><i class="fas fa-clipboard-check"></i> Surat Selesai</a></li>
             <li><a><i class="fas fa-users"></i> Data Penduduk</a></li>
@@ -855,6 +998,59 @@
 </div>
 
 
+<div id="cuaca" class="content-section">
+    <div class="weather-container">
+        <div class="weather-card-main">
+            <div class="weather-main-header">
+                <span class="badge-lokasi"><i class="fas fa-map-marker-alt"></i> Sirajaoloan, Tarutung</span>
+                <h2 id="current-date">Selasa, 07 April 2026</h2>
+            </div>
+            
+            <div class="weather-body">
+                <div class="weather-temp-section">
+                    <div class="weather-icon-wrapper">
+                        <i class="fas fa-cloud-sun-rain weather-animate"></i>
+                    </div>
+                    <div class="temp-wrapper">
+                        <span class="temp-number">22</span><span class="temp-unit">°C</span>
+                        <p class="weather-desc">Cerah Berawan</p>
+                    </div>
+                </div>
+
+                <div class="weather-stats-grid">
+                    <div class="stat-box">
+                        <i class="fas fa-tint"></i>
+                        <span>Kelembapan</span>
+                        <p>85%</p>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-wind"></i>
+                        <span>Kecepatan Angin</span>
+                        <p>8 km/j</p>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-umbrella"></i>
+                        <span>Hujan</span>
+                        <p>20%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forecast-section">
+            <h3><i class="far fa-clock"></i> Prakiraan Cuaca Hari Ini</h3>
+            <div class="forecast-wrapper">
+                <div class="forecast-card"><span>07:00</span><i class="fas fa-cloud-sun"></i><strong>19°C</strong></div>
+                <div class="forecast-card active"><span>10:00</span><i class="fas fa-sun"></i><strong>22°C</strong></div>
+                <div class="forecast-card"><span>13:00</span><i class="fas fa-cloud-rain"></i><strong>22°C</strong></div>
+                <div class="forecast-card"><span>16:00</span><i class="fas fa-cloud-showers-heavy"></i><strong>21°C</strong></div>
+                <div class="forecast-card"><span>19:00</span><i class="fas fa-cloud"></i><strong>19°C</strong></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script>
         let db = [];
         
@@ -1201,7 +1397,35 @@ function muatStruktur() {
 
     // Inisialisasi
     document.addEventListener("DOMContentLoaded", renderStaf);
-    
+
+
+
+    //untuk penyesuaian tanggal otomatis fitur perkiraan cuaca
+    document.addEventListener('DOMContentLoaded', function() {
+    const dateElement = document.getElementById('current-date');
+    if (dateElement) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        dateElement.innerText = today.toLocaleDateString('id-ID', options);
+    }
+});
+// Update fungsi showSection Anda agar transisinya mulus
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(s => {
+        s.style.display = 'none';
+        s.style.opacity = '0';
+    });
+
+    const active = document.getElementById(sectionId);
+    if (active) {
+        active.style.display = 'block';
+        setTimeout(() => {
+            active.style.opacity = '1';
+            active.style.transition = 'opacity 0.5s ease';
+        }, 50);
+    }
+}
     </script>
 </body>
 </html>
