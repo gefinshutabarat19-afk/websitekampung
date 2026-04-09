@@ -518,6 +518,69 @@
 }
 
 
+    #area-cetak-sktm { display: none; } /* Sembunyikan di layar dashboard */
+
+    @media print {
+        body * { visibility: hidden; } /* Sembunyikan seluruh isi dashboard saat print */
+        #area-cetak-sktm, #area-cetak-sktm * { visibility: visible; } /* Hanya tampilkan surat */
+        #area-cetak-sktm { 
+            display: block !important; 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            width: 100%;
+        }
+    }
+
+<style>
+    /* CSS Khusus Mode Cetak */
+    @media print {
+        /* Sembunyikan elemen dashboard */
+        body * { visibility: hidden; }
+        
+        /* Tampilkan hanya area cetak */
+        #area-cetak-sktm, #area-cetak-sktm * { 
+            visibility: visible; 
+        }
+
+        #area-cetak-sktm { 
+            display: block !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 10mm 15mm; /* Margin standar kertas */
+            background: white;
+            /* Paksa Font Times New Roman 12pt */
+            font-family: 'Times New Roman', Times, serif !important;
+            font-size: 12pt !important;
+            color: black !important;
+            line-height: 1.4 !important;
+        }
+
+        /* Hilangkan garis pada tabel dan buat teks sejajar */
+        #area-cetak-sktm table {
+            width: 100%;
+            border-collapse: collapse !important;
+            border: none !important;
+            margin-bottom: 10px;
+        }
+
+        #area-cetak-sktm td {
+            border: none !important; /* Menghilangkan semua garis di tabel */
+            padding: 2px 0 !important;
+            vertical-align: top;
+            font-size: 12pt !important;
+        }
+        
+        /* Menghilangkan garis horizontal jika ada pada input/elemen lain */
+        hr, .no-print { display: none !important; }
+    }
+</style>
+
+
+    
+
     </style>
 </head>
 <body>
@@ -598,31 +661,114 @@
                 <div class="stat-card bg-orange"><h3>Dalam Proses</h3><p>12</p></div>
             </div>
 
-            <div class="card">
-                <h2><i class="fas fa-file-signature" style="color: #6a11cb;"></i> Buat Pengajuan Surat</h2>
-                <form id="entryForm" onsubmit="handleForm(event)">
-                    <input type="hidden" id="editId" value="-1">
-                    <div class="form-row">
-                        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="in-nama" required></div>
-                        <div class="form-group"><label>NIK (Sesuai KTP)</label><input type="number" id="in-nik" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label>Tanggal Lahir</label><input type="date" id="in-tgl" required></div>
-                        <div class="form-group"><label>NISN (Opsional)</label><input type="number" id="in-nisn"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Agama</label>
-                            <select id="in-agama"><option>Islam</option><option>Kristen</option><option>Katolik</option><option>Hindu</option><option>Budha</option></select>
-                        </div>
-                        <div class="form-group">
+           <div class="card" style="margin-top: 20px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    <h2 style="margin-bottom: 20px; color: #302b63;"><i class="fas fa-file-invoice"></i> Form Layanan SKTM Desa Siraja Oloan</h2>
+    <form id="entryForm" onsubmit="handleForm(event)">
+        
+        <h4 style="color: #818cf8; margin-bottom: 15px; font-size: 0.9rem; border-left: 3px solid #818cf8; padding-left: 10px;">DATA ORANG TUA / WALI</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            <div class="form-group">
+                <label>Nama Lengkap Orang Tua</label>
+                <input type="text" id="parent-nama" placeholder="Nama Lengkap" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div class="form-group">
+                <label>NIK Orang Tua</label>
+                <input type="number" id="parent-nik" placeholder="16 Digit NIK" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <select id="parent-kerja" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option value="Petani">Petani</option>
+                    <option value="Nelayan">Nelayan</option>
+                    <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
+                    <option value="Wiraswasta">Wiraswasta</option>
+                    <option value="Pegawai Swasta">Pegawai Swasta</option>
+                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                    <option value="Tukang Bangunan">Tukang Bangunan</option>
+                    <option value="Pedagang">Pedagang</option>
+                    <option value="Tidak Bekerja">Tidak Bekerja / Pensiunan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Agama</label>
+                <select id="parent-agama" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option>Kristen Protestan</option>
+                    <option>Katolik</option>
+                    <option>Islam</option>
+                    <option>Hindu</option>
+                    <option>Budha</option>
+                </select>
+            </div>
+        </div>
+        <h4 style="color: #818cf8; margin-bottom: 15px; font-size: 0.9rem; border-left: 3px solid #818cf8; padding-left: 10px;">DOMISILI (PILIH ALAMAT)</h4>
+        <div style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 12px; border: 1px dashed rgba(0,0,0,0.1); margin-bottom: 20px;">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Alamat Jalan / Dusun</label>
+                <input type="text" id="parent-alamat" placeholder="Contoh: Jl. Lintas Tarutung No. 12" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label>Kabupaten</label>
+                    <select id="select-kabupaten" onchange="updateKecamatan()" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                        <option value="">-- Pilih Kabupaten --</option>
+                        <option value="Tapanuli Utara">Tapanuli Utara</option>
+                        <option value="Tapanuli Tengah">Tapanuli Tengah</option>
+                        <option value="Toba">Toba</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Kecamatan</label>
+                    <select id="select-kecamatan" onchange="updateDesa()" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                        <option value="">-- Pilih Kecamatan --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Desa</label>
+                    <select id="select-desa" onchange="updateKodePos()" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                        <option value="">-- Pilih Desa --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Kode Pos</label>
+                    <input type="text" id="select-kodepos" placeholder="Otomatis" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; background: #eee;">
+                </div>
+            </div>
+        </div>
+
+        <h4 style="color: #c084fc; margin-bottom: 15px; font-size: 0.9rem; border-left: 3px solid #c084fc; padding-left: 10px;">DATA ANAK (PENERIMA BEASISWA)</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+                <label>Nama Lengkap Anak</label>
+                <input type="text" id="child-nama" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select id="child-jk" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tempat, Tanggal Lahir</label>
+                <input type="text" id="child-ttl" placeholder="Contoh: Tarutung, 12-05-2008" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div class="form-group">
+                <label>NIK Anak</label>
+                <input type="number" id="child-nik" placeholder="16 Digit NIK Anak" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
                             <label>Jenis Pelayanan</label>
                             <select id="in-jenis"><option>Surat Keterangan Usaha (SKU)</option><option>Surat Keterangan Tidak Mampu (SKTM)</option><option>Surat Domisili</option></select>
                         </div>
-                    </div>
-                    <button type="submit" id="btnAction" class="btn-submit">PROSES & CETAK DOKUMEN</button>
-                </form>
-            </div>
+
+        <button type="submit" class="btn-submit" style="margin-top: 25px; width: 100%; padding: 15px; background: var(--accent-grad); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem;">
+            <i class="fas fa-print"></i> GENERATE & CETAK SURAT
+        </button>
+    </form>
+</div>
+
 
             <div class="card">
                 <h2><i class="fas fa-table" style="color: #2575fc;"></i> Database Pengajuan</h2>
@@ -1051,6 +1197,60 @@
 </div>
 
 
+<div id="area-cetak-sktm" class="surat-konten">
+    <div style="text-align: center; border-bottom: 3px solid black; padding-bottom: 2px; margin-bottom: 15px;">
+        <h3 style="margin: 0; font-size: 14pt;">PEMERINTAH KABUPATEN TAPANULI UTARA</h3>
+        <h3 style="margin: 0; font-size: 14pt;">KECAMATAN TARUTUNG</h3>
+        <h2 style="margin: 0; font-size: 16pt;">DESA SIRAJA OLOAN</h2>
+        <p style="margin: 0; font-size: 10pt;">Kode Pos: 22411</p>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 15px;">
+        <h3 style="text-decoration: underline; margin: 0; font-size: 14pt;">SURAT KETERANGAN TIDAK MAMPU</h3>
+        <p style="margin: 0;">Nomor : ________ / ________ / ________</p>
+    </div>
+
+    <p style="text-align: justify; margin-bottom: 10px;">
+        Yang bertanda tangan di bawah ini Kepala Desa Siraja Oloan Kecamatan Tarutung Kabupaten Tapanuli Utara, dengan ini menerangkan bahwa :
+    </p>
+
+    <table style="width: 100%; margin-left: 30px; border-collapse: collapse;">
+        <tr><td width="150">Nama</td><td>: <b id="out-nama-ortu"></b></td></tr>
+        <tr><td>NIK</td><td>: <span id="out-nik-ortu"></span></td></tr>
+        <tr><td>Agama</td><td>: <span id="out-agama-ortu"></span></td></tr>
+        <tr><td>Pekerjaan</td><td>: <span id="out-pekerjaan-ortu"></span></td></tr>
+        <tr><td>Alamat</td><td>: <span id="out-alamat-ortu"></span></td></tr>
+    </table>
+
+    <p style="margin: 10px 0 5px 0;">Adalah Benar Orang tua / Wali dari :</p>
+
+    <table style="width: 100%; margin-left: 30px; border-collapse: collapse;">
+        <tr><td width="150">Nama</td><td>: <b id="out-nama"></b></td></tr>
+        <tr><td>NIK</td><td>: <span id="out-nik"></span></td></tr>
+        <tr><td>Tempat/Tgl Lahir</td><td>: <span id="out-ttl"></span></td></tr>
+        <tr><td>Jenis Kelamin</td><td>: <span id="out-jk"></span></td></tr>
+        <tr><td>Alamat</td><td>: <span id="out-alamat"></span></td></tr>
+    </table>
+
+    <p style="text-align: justify; margin-top: 10px;">
+        Berdasarkan keterangan yang ada pada kami, benar bahwa nama tersebut di atas adalah warga Desa Siraja Oloan yang tergolong dalam <b>KELUARGA KURANG MAMPU</b>. 
+        Surat Keterangan ini diberikan untuk dapat dipergunakan sebagai persyaratan administrasi memperoleh <b>Beasiswa</b>.
+    </p>
+
+    <p style="text-align: justify; margin-top: 5px;">
+        Demikian surat keterangan ini kami perbuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
+    </p>
+
+    <div style="margin-top: 30px; float: right; width: 250px; text-align: center;">
+        <p>Siraja Oloan, <span id="out-tgl-surat"></span></p>
+        <p style="margin-bottom: 60px;"><b>KEPALA DESA SIRAJA OLOAN</b></p>
+        <p><b><u>PESTA PANDIANGAN</u></b></p>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+
+
     <script>
         let db = [];
         
@@ -1426,6 +1626,172 @@ function showSection(sectionId) {
         }, 50);
     }
 }
+
+
+
+
+// Database Wilayah Lengkap sesuai permintaan Anda
+const dataWilayahSRO = {
+    "Aek Siancimun": "22411", "Hapoltahan": "22417", "Hutatoruan I": "22451",
+    "Hutatoruan II": "22461", "Hutatoruan III": "22462", "Hutatoruan IV": "22463",
+    "Hutatoruan V": "22464", "Hutatoruan VI": "22465", "Hutatoruan VII": "22474",
+    "Hutatoruan VIII": "22475", "Hutatoruan IX": "22476", "Hutatoruan X": "22481",
+    "Hutatoruan XI": "22482", "Jambur Nauli": "22483", "Parbaju Julu": "22484",
+    "Parbaju Tonga": "22411", "Parburbu I": "22417", "Parburbu II": "22451",
+    "Parburbu Pea": "22461", "Partali Julu": "22462", "Saitnihuta": "22463",
+    "Siandor-andor": "22464", "Sihatoruan": "22465", "Simamora": "22474",
+    "Siraja Oloan": "22411", "Sitampurung": "22475", "Sosunggulon": "22476",
+    "Tangga Batu": "22481", "Hutapea Banuarea": "22482", "Onan Hasang": "22483"
+};
+
+const daftarKecamatan = ["Tarutung", "Siatas Barita", "Sipoholon", "Adian Koting", "Pahae Julu", "Pahae Jae", "Simangumban", "Purba Tua", "Siborong-borong", "Pagaran", "Muara", "Sipahutar", "Pangaribuan", "Garoga", "Parmonangan"];
+
+function updateKecamatan() {
+    const kecSelect = document.getElementById("select-kecamatan");
+    kecSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+    daftarKecamatan.forEach(kec => {
+        kecSelect.innerHTML += `<option value="${kec}">${kec}</option>`;
+    });
+}
+
+function updateDesa() {
+    const desaSelect = document.getElementById("select-desa");
+    desaSelect.innerHTML = '<option value="">-- Pilih Desa --</option>';
+    Object.keys(dataWilayahSRO).forEach(desa => {
+        desaSelect.innerHTML += `<option value="${desa}">${desa}</option>`;
+    });
+}
+
+function updateKodePos() {
+    const desa = document.getElementById("select-desa").value;
+    const posInput = document.getElementById("select-kodepos");
+    posInput.value = dataWilayahSRO[desa] || "";
+}
+
+function handleForm(event) {
+    event.preventDefault();
+
+    // Ambil semua data input
+    const pNama = document.getElementById('parent-nama').value;
+    const pNik = document.getElementById('parent-nik').value;
+    const pKerja = document.getElementById('parent-kerja').value;
+    const pAlamatJalan = document.getElementById('parent-alamat').value;
+    const kab = document.getElementById('select-kabupaten').value;
+    const kec = document.getElementById('select-kecamatan').value;
+    const desa = document.getElementById('select-desa').value;
+    const pos = document.getElementById('select-kodepos').value;
+
+    const cNama = document.getElementById('child-nama').value;
+    const cJk = document.getElementById('child-jk').value;
+    const cTtl = document.getElementById('child-ttl').value;
+    const cNik = document.getElementById('child-nik').value;
+
+    const alamatLengkap = `${pAlamatJalan}, Desa ${desa}, Kec. ${kec}, Kab. ${kab}, Kode Pos: ${pos}`;
+
+    // Kirim ke Output Cetak (Pastikan elemen ID ini ada di template surat Anda)
+    if(document.getElementById('out-p-nama')) document.getElementById('out-p-nama').innerText = pNama.toUpperCase();
+    if(document.getElementById('out-p-nik')) document.getElementById('out-p-nik').innerText = pNik;
+    if(document.getElementById('out-p-kerja')) document.getElementById('out-p-kerja').innerText = pKerja;
+    if(document.getElementById('out-p-alamat')) document.getElementById('out-p-alamat').innerText = alamatLengkap;
+
+    if(document.getElementById('out-c-nama')) document.getElementById('out-c-nama').innerText = cNama.toUpperCase();
+    if(document.getElementById('out-c-jk')) document.getElementById('out-c-jk').innerText = cJk;
+    if(document.getElementById('out-c-ttl')) document.getElementById('out-c-ttl').innerText = cTtl;
+    if(document.getElementById('out-c-nik')) document.getElementById('out-c-nik').innerText = cNik;
+    if(document.getElementById('out-c-alamat')) document.getElementById('out-c-alamat').innerText = alamatLengkap;
+
+    // Tanggal Surat
+    const tglSekarang = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    if(document.getElementById('out-tgl-surat')) document.getElementById('out-tgl-surat').innerText = tglSekarang;
+
+    alert("Data berhasil diproses! Siap mencetak dokumen.");
+    window.print();
+}
+
+function handleForm(event) {
+    event.preventDefault(); // Menghentikan reload halaman
+
+    // 1. Ambil Data dari Form Dashboard
+    const data = {
+        nama: document.getElementById('input-nama').value,
+        nik: document.getElementById('input-nik').value,
+        ttl: document.getElementById('input-ttl').value,
+        jk: document.getElementById('input-jk').value,
+        pekerjaan: document.getElementById('input-pekerjaan').value,
+        agama: document.getElementById('input-agama').value,
+        alamat: document.getElementById('input-alamat').value
+    };
+
+    // 2. Format Tanggal Hari Ini
+    const tgl = new Date().toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    // 3. Masukkan ke Template Cetak
+    document.getElementById('out-nama').innerText = data.nama.toUpperCase();
+    document.getElementById('out-nik').innerText = data.nik;
+    document.getElementById('out-ttl').innerText = data.ttl;
+    document.getElementById('out-jk').innerText = data.jk;
+    document.getElementById('out-pekerjaan').innerText = data.pekerjaan;
+    document.getElementById('out-agama').innerText = data.agama;
+    document.getElementById('out-alamat').innerText = data.alamat;
+    document.getElementById('out-tgl-surat').innerText = tgl;
+    document.getElementById('out-no').innerText = Math.floor(100 + Math.random() * 900); // Nomor surat otomatis sementara
+
+    // 4. Jalankan Perintah Print Browser
+    window.print();
+}
+
+
+function handleForm(event) {
+    event.preventDefault();
+
+    // 1. Ambil Nilai dari Input Form
+    const pNama = document.getElementById('parent-nama').value;
+    const pNik = document.getElementById('parent-nik').value;
+    const pAgama = document.getElementById('parent-agama').value;
+    const pKerja = document.getElementById('parent-kerja').value;
+    const pAlamat = document.getElementById('parent-alamat').value;
+    const desa = document.getElementById('select-desa').value;
+    const kec = document.getElementById('select-kecamatan').value;
+
+    const cNama = document.getElementById('child-nama').value;
+    const cNik = document.getElementById('child-nik').value;
+    const cTtl = document.getElementById('child-ttl').value;
+    const cJk = document.getElementById('child-jk').value;
+
+    const alamatLengkap = `${pAlamat}, Desa ${desa}, Kec. ${kec}`;
+
+    // 2. Masukkan ke ID Output di Template Surat
+    document.getElementById('out-nama-ortu').innerText = pNama.toUpperCase();
+    document.getElementById('out-nik-ortu').innerText = pNik;
+    document.getElementById('out-agama-ortu').innerText = pAgama;
+    document.getElementById('out-pekerjaan-ortu').innerText = pKerja;
+    document.getElementById('out-alamat-ortu').innerText = alamatLengkap;
+
+    document.getElementById('out-nama').innerText = cNama.toUpperCase();
+    document.getElementById('out-nik').innerText = cNik;
+    document.getElementById('out-ttl').innerText = cTtl;
+    document.getElementById('out-jk').innerText = cJk;
+    document.getElementById('out-alamat').innerText = alamatLengkap;
+
+    // 3. Set Tanggal Otomatis
+    const hariIni = new Date();
+    const opsi = { day: 'numeric', month: 'long', year: 'numeric' };
+    document.getElementById('out-tgl-surat').innerText = hariIni.toLocaleDateString('id-ID', opsi);
+
+    // 4. Validasi Jenis Pelayanan
+    const jenisSurat = document.getElementById('in-jenis').value;
+    if (jenisSurat !== "Surat Keterangan Tidak Mampu (SKTM)") {
+        alert("Maaf, template cetak saat ini hanya tersedia untuk SKTM.");
+        return;
+    }
+
+    // 5. Jalankan Perintah Cetak
+    window.print();
+}
+
+
     </script>
 </body>
 </html>
