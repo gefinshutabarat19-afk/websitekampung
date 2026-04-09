@@ -601,25 +601,24 @@
     line-height: 1.4;
     padding-left: 2px;
 }
-
- 
-
     </style>
+
+
+
 </head>
 <body>
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-    <div id="login-page">
-        <div class="login-card">
-            <div style="background: var(--accent-grad); width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+        <div id="login-page">
+            <div class="login-card">
+             <div style="background: var(--accent-grad); width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                 <i class="fas fa-university" style="font-size: 2rem; color: white;"></i>
             </div>
             <h2 id="auth-title" style="color: #2c3e50; margin-bottom: 30px; font-size: 1.2rem;">SISTEM INFORMASI <br> DESA SIRAJAOLOAN</h2>
-            
             <div id="auth-tabs" style="display: flex; border-bottom: 2px solid #f0f2f5; margin-bottom: 30px;">
                 <button onclick="switchAuth('login')" id="t-login" style="flex:1; padding:15px; border:none; background:none; cursor:pointer; font-weight:bold; border-bottom: 3px solid #6a11cb; color: #6a11cb;">LOGIN</button>
                 <button onclick="switchAuth('reg')" id="t-reg" style="flex:1; padding:15px; border:none; background:none; cursor:pointer; font-weight:bold; color:#7f8c8d;">DAFTAR</button>
             </div>
-
+    
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <input type="text" placeholder="Username / NIK" required style="margin-bottom:18px;">
                 <input type="password" placeholder="Password" required style="margin-bottom:18px;">
@@ -628,18 +627,32 @@
             </form>
 
             <form id="registerForm" style="display:none;" onsubmit="handleRegister(event)">
-                <input type="number" placeholder="NIK (16 Digit)" required style="margin-bottom:15px;">
-                <input type="text" placeholder="Nama Lengkap" required style="margin-bottom:15px;">
-                <input type="password" placeholder="Buat Password" required style="margin-bottom:15px;">
-                <button type="submit" class="btn-submit">DAFTAR SEKARANG</button>
-            </form>
-
+            <input type="number" id="reg-nik" placeholder="NIK (16 Digit)" required style="margin-bottom:15px;">
+            <input type="text" id="reg-nama" placeholder="Nama Lengkap" required style="margin-bottom:15px;">
+            <input type="email" id="reg-email" placeholder="Alamat Email Aktif" required style="margin-bottom:15px;">
+            <input type="password" id="reg-pass" placeholder="Buat Password" required style="margin-bottom:15px;">
+        <div id="ve-section" style="display:none; background:#eef2ff; padding:15px; border-radius:12px; margin-bottom:15px; border: 1px solid #d1d5db;">
+        <p style="font-size:0.8rem; color:#4338ca; margin-bottom:10px;">Kode verifikasi telah dikirim ke email Anda.</p>
+        <input type="text" id="reg-otp-input" placeholder="Masukkan 6 Digit Kode" style="text-align:center; font-weight:bold;">
+        <button type="button" onclick="verifyOTP()" class="btn-submit" style="background:#10b981; margin-top:10px;">KONFIRMASI PENDAFTARAN</button>
+    </div>
+    <button type="submit" id="btn-daftar-awal" class="btn-submit">KIRIM KODE KE EMAIL</button>
+</form>
             <form id="forgotForm" style="display:none;" onsubmit="alert('Kode reset terkirim'); switchAuth('login'); return false;">
                 <input type="number" placeholder="Masukkan NIK Terdaftar" required style="margin-bottom:20px;">
                 <button type="submit" class="btn-submit">KIRIM KODE PEMULIHAN</button>
             </form>
         </div>
     </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+   // Ganti teks di dalam kutip ini dengan Public Key yang baru Anda salin
+   emailjs.init("fjJfU0-CiqiOVPBQR"); 
+})();
+</script>
+
 
     <nav class="sidebar" id="sidebar-nav">
         <div class="sidebar-brand">SISTEM INFORMASI LAYANAN DESA</div>
@@ -676,6 +689,7 @@
             <h1 id="page-title">Dashboard Utama</h1>
             <button class="btn-keluar" onclick="location.reload()">Log Out <i class="fas fa-sign-out-alt"></i></button>
         </div>
+
 
         <div id="dash" class="content-section active-section">
             <div class="stats-grid">
@@ -1070,7 +1084,6 @@
 
 
 
-
 <div id="staf" class="content-section">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
@@ -1275,7 +1288,6 @@
 
     <script>
         let db = [];
-        
         function switchAuth(type) {
             const loginForm = document.getElementById('loginForm');
             const regForm = document.getElementById('registerForm');
@@ -1283,12 +1295,10 @@
             const tabs = document.getElementById('auth-tabs');
             const tLogin = document.getElementById('t-login');
             const tReg = document.getElementById('t-reg');
-
             loginForm.style.display = 'none'; regForm.style.display = 'none'; forgotForm.style.display = 'none';
             tabs.style.display = 'flex';
             tLogin.style.borderBottom = "none"; tReg.style.borderBottom = "none";
             tLogin.style.color = "#7f8c8d"; tReg.style.color = "#7f8c8d";
-
             if (type === 'login') {
                 loginForm.style.display = 'block'; tLogin.style.borderBottom = "3px solid #6a11cb"; tLogin.style.color = "#6a11cb";
             } else if (type === 'reg') {
@@ -1302,33 +1312,27 @@
             e.preventDefault(); 
             document.getElementById('login-page').style.display = 'none'; 
         }
-
         function handleRegister(e) { 
             e.preventDefault(); 
             alert('Pendaftaran Berhasil!'); 
             switchAuth('login'); 
         }
-        
         function toggleSidebar() { 
             document.getElementById('sidebar-nav').classList.toggle('mobile-active'); 
             document.getElementById('overlay').classList.toggle('active'); 
         }
-
         function toggleDropdown() { 
             const menu = document.getElementById('about-menu');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
             document.getElementById('caret').classList.toggle('rotate');
         }
-
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active-section'));
-            document.getElementById(id).classList.add('active-section');
-            
+            document.getElementById(id).classList.add('active-section'); 
             // Update active link style
             document.querySelectorAll('.sidebar ul li a').forEach(a => a.classList.remove('active'));
             const targetLink = document.getElementById('link-' + id);
             if(targetLink) targetLink.classList.add('active');
-
             // Hide dropdown if showing sections from it
             if(!['dash', 'galeri'].includes(id)) {
                 const menu = document.getElementById('about-menu');
@@ -1340,8 +1344,6 @@
                 menu.style.display = 'none';
                 document.getElementById('caret').classList.remove('rotate');
             }
-
-
             document.getElementById('page-title').innerText = (id === 'galeri' ? 'GALERI DESA' : id.toUpperCase());
             if(window.innerWidth <= 768) toggleSidebar();
         }
@@ -1807,6 +1809,8 @@ function handleForm(event) {
         alert("Terjadi kesalahan teknis. Pastikan semua kolom form sudah diisi.");
     }
 }
+
+
 // Fungsi ini otomatis berjalan setelah jendela printer ditutup
 window.onafterprint = function() {
     const areaCetak = document.getElementById('area-cetak-sktm'); 
@@ -1824,23 +1828,107 @@ function gantiMenu(namaMenu) {
         section.style.display = 'none';
     });
     document.getElementById(namaMenu).style.display = 'block';
-
     // WAJIB: Sembunyikan surat jika pindah ke menu lain (Galeri, Cuaca, dll)
     const surat = document.getElementById('area-cetak-sktm');
     if (surat) surat.style.display = 'none';
 }
-
 // 2. Fungsi setelah proses cetak selesai atau dibatalkan
 window.onafterprint = function() {
     const areaCetak = document.getElementById('area-cetak-sktm');
     if (areaCetak) areaCetak.style.display = 'none'; // Sembunyikan surat kembali
-
     const form = document.getElementById('entryForm');
     if (form) form.reset(); // Kosongkan form di beranda
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+
+
+let tempData = {};
+let generatedOTP = "";
+// 1. FUNGSI PENDAFTARAN & KIRIM EMAIL RIIL
+async function handleRegister(e) {
+    e.preventDefault();   
+    const emailValue = document.getElementById('reg-email').value;
+    const namaValue = document.getElementById('reg-nama').value;
+    const nikValue = document.getElementById('reg-nik').value;
+    const passValue = document.getElementById('reg-pass').value;
+    // Cek duplikasi NIK di penyimpanan browser
+    let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
+    if(dbUsers.find(u => u.nik === nikValue)) {
+        alert("NIK ini sudah terdaftar!");
+        return;
+    }
+    // Generate 6 Digit Kode
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    tempData = { nik: nikValue, email: emailValue, nama: namaValue, pass: passValue };
+    // Tampilkan status loading pada tombol
+    const btn = document.getElementById('btn-daftar-awal');
+    btn.innerText = "Mengirim Kode...";
+    btn.disabled = true;
+    // Format waktu untuk variabel {{time}} di template Anda
+    const now = new Date();
+    const expiryTime = new Date(now.getTime() + 15 * 60000); // Tambah 15 menit
+    const timeString = expiryTime.getHours().toString().padStart(2, '0') + ":" + 
+                       expiryTime.getMinutes().toString().padStart(2, '0');
+    try {
+        // MENGIRIM EMAIL (Parameter disesuaikan dengan Dashboard Gefin)
+        await emailjs.send("gefin_servicit", "template_mvqzsjh", {
+            email: emailValue,      // Harus 'email' agar masuk ke {{email}} di dashboard
+            passcode: generatedOTP,  // Harus 'passcode' agar masuk ke {{passcode}}
+            time: timeString        // Harus 'time' agar masuk ke {{time}}
+        });
+        alert("Kode verifikasi telah dikirim ke: " + emailValue);
+        document.getElementById('ve-section').style.display = 'block';
+        btn.style.display = 'none';
+    } catch (error) {
+        console.error("EmailJS Error:", error);
+        alert("Gagal kirim: " + (error.text || JSON.stringify(error)));      
+        btn.innerText = "KIRIM KODE KE EMAIL";
+        btn.disabled = false;
+    }
+}
+// 2. VERIFIKASI KODE & SIMPAN DATA KE SITUS
+function verifyOTP() {
+    const inputOTP = document.getElementById('reg-otp-input').value; 
+    if(inputOTP === generatedOTP && generatedOTP !== "") {
+        let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
+        dbUsers.push(tempData);
+        // Simpan permanen di situs (LocalStorage)
+        localStorage.setItem('users', JSON.stringify(dbUsers));      
+        alert("Pendaftaran Berhasil! Data NIK & Sandi telah disimpan."); 
+        // Refresh halaman atau pindah ke Login
+        location.reload(); 
+    } else {
+        alert("Kode verifikasi salah! Silahkan periksa email Anda kembali.");
+    }
+}
+
+
+// 3. FUNGSI LOGIN DENGAN VALIDASI DATA
+function handleLogin(event) {
+    event.preventDefault(); // Mencegah form reload halaman
+    // Ambil input dari form login (Pastikan ID input sesuai dengan HTML Anda)
+    // Asumsi: input pertama adalah NIK, input kedua adalah Password
+    const inputs = document.querySelectorAll('#loginForm input');
+    const inputNIK = inputs[0].value;
+    const inputPass = inputs[1].value;
+    // 1. Ambil data semua user dari LocalStorage
+    const dbUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // 2. Cari user yang NIK dan Password-nya cocok dengan input
+    const userDitemukan = dbUsers.find(user => user.nik === inputNIK && user.pass === inputPass);
+    if (userDitemukan) {
+        // JIKA COCOK
+        alert("Login Berhasil! Selamat datang, " + userDitemukan.nama);   
+        // Sembunyikan halaman login dan tampilkan dashboard
+        document.getElementById('login-page').style.display = 'none';      
+        // (Opsional) Tampilkan nama user di judul dashboard
+        const dashboardTitle = document.getElementById('page-title');
+        if(dashboardTitle) dashboardTitle.innerText = "Dashboard: " + userDitemukan.nama;
+    } else {
+        // JIKA TIDAK COCOK
+        alert("Gagal Masuk: NIK atau Kata Sandi Anda salah!");
+    }
+}
 
     </script>
 </body>
