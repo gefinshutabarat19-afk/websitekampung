@@ -104,7 +104,7 @@
         /* --- LOGIN PAGE --- */
         #login-page {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: url('https://pbs.twimg.com/media/B4YaZgoCAAAkkFQ.jpg') no-repeat center center fixed; 
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Siraja_Oloan_05.jpg/3840px-Siraja_Oloan_05.jpg') no-repeat center center fixed; 
             background-size: cover; 
             display: flex; justify-content: center; align-items: center; z-index: 2000;
         }
@@ -512,14 +512,10 @@
     .weather-stats-grid {
         grid-template-columns: 1fr 1fr 1fr; /* Tetap 3 kolom kecil */
     }
-
     .stat-box { padding: 10px; }
     .stat-box p { font-size: 0.9rem; }
 }
-
-
     #area-cetak-sktm { display: none; } /* Sembunyikan di layar dashboard */
-
     @media print {
         body * { visibility: hidden; } /* Sembunyikan seluruh isi dashboard saat print */
         #area-cetak-sktm, #area-cetak-sktm * { visibility: visible; } /* Hanya tampilkan surat */
@@ -531,16 +527,13 @@
             width: 100%;
         }
     }
-
     @media print {
     /* Sembunyikan seluruh isi halaman web */
     body * { visibility: hidden; }
-    
     /* Hanya tampilkan area surat */
     #area-cetak-sktm, #area-cetak-sktm * { 
         visibility: visible; 
     }
-
     #area-cetak-sktm { 
         display: block !important;
         position: absolute;
@@ -550,24 +543,20 @@
         padding: 0;
         margin: 0;
     }
-
     /* Hilangkan elemen yang tidak perlu di cetakan */
     .no-print { display: none !important; }
-    
     /* Hilangkan border bantuan edit saat diprint */
     [contenteditable="true"] {
         outline: none !important;
         border: none !important;
     }
 }
-
 /* Gaya hover saat di layar monitor agar user tahu bisa diklik */
 [contenteditable="true"]:hover {
     background-color: #fffde7;
     cursor: pointer;
     border-bottom: 1px dashed blue;
 }
-
 
 @media print {
     /* Sembunyikan segalanya kecuali area cetak */
@@ -603,8 +592,7 @@
 }
     </style>
 
-
-
+    
 </head>
 <body>
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
@@ -637,19 +625,33 @@
         <button type="button" onclick="verifyOTP()" class="btn-submit" style="background:#10b981; margin-top:10px;">KONFIRMASI PENDAFTARAN</button>
     </div>
     <button type="submit" id="btn-daftar-awal" class="btn-submit">KIRIM KODE KE EMAIL</button>
+                </form>
+                   <form id="forgotForm" style="display:none;" onsubmit="handleForgotPassword(event)">
+    <div id="step-cari-nik">
+        <input type="number" id="forgot-nik" placeholder="Masukkan NIK Terdaftar" required style="margin-bottom:15px;">
+        <input type="email" id="forgot-email" placeholder="Masukkan Email Terdaftar" required style="margin-bottom:20px;">
+        <button type="submit" id="btn-forgot-otp" class="btn-submit">KIRIM KODE PEMULIHAN</button>
+    </div>
+
+    <div id="forgot-ve-section" style="display:none; background:#fff7ed; padding:15px; border-radius:12px; margin-top:15px; border: 1px solid #fed7aa;">
+        <p style="font-size:0.8rem; color:#9a3412; margin-bottom:10px;">Cek email Anda untuk kode reset.</p>
+        <input type="text" id="forgot-otp-input" placeholder="6 Digit Kode OTP" style="text-align:center; font-weight:bold; margin-bottom:10px;">
+        <input type="password" id="forgot-new-pass" placeholder="Buat Kata Sandi Baru" style="margin-bottom:10px;">
+        <button type="button" onclick="verifyAndResetPassword()" class="btn-submit" style="background:#f97316;">SIMPAN SANDI BARU</button>
+    </div>
 </form>
-            <form id="forgotForm" style="display:none;" onsubmit="alert('Kode reset terkirim'); switchAuth('login'); return false;">
-                <input type="number" placeholder="Masukkan NIK Terdaftar" required style="margin-bottom:20px;">
-                <button type="submit" class="btn-submit">KIRIM KODE PEMULIHAN</button>
             </form>
         </div>
     </div>
+
+
+    
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
    (function(){
    // Ganti teks di dalam kutip ini dengan Public Key yang baru Anda salin
-   emailjs.init("fjJfU0-CiqiOVPBQR"); 
+   emailjs.init("7XZlTemgxM2HznOMI"); 
 })();
 </script>
 
@@ -1872,7 +1874,7 @@ async function handleRegister(e) {
                        expiryTime.getMinutes().toString().padStart(2, '0');
     try {
         // MENGIRIM EMAIL (Parameter disesuaikan dengan Dashboard Gefin)
-        await emailjs.send("gefin_servicit", "template_mvqzsjh", {
+        await emailjs.send("service_digital12", "template_acxs50m", {
             email: emailValue,      // Harus 'email' agar masuk ke {{email}} di dashboard
             passcode: generatedOTP,  // Harus 'passcode' agar masuk ke {{passcode}}
             time: timeString        // Harus 'time' agar masuk ke {{time}}
@@ -1927,6 +1929,105 @@ function handleLogin(event) {
     } else {
         // JIKA TIDAK COCOK
         alert("Gagal Masuk: NIK atau Kata Sandi Anda salah!");
+    }
+}
+
+
+let resetData = {}; // Penampung sementara data reset
+// 1. FUNGSI KIRIM OTP LUPA SANDI
+async function handleForgotPassword(e) {
+    e.preventDefault();
+    const nikInput = document.getElementById('forgot-nik').value;
+    const emailInput = document.getElementById('forgot-email').value;
+    const btn = document.getElementById('btn-forgot-otp');
+    // Ambil database user
+    let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // Validasi: Apakah NIK dan Email cocok?
+    const user = dbUsers.find(u => u.nik === nikInput && u.email === emailInput);
+
+    if (!user) {
+        alert("Data tidak ditemukan! Pastikan NIK dan Email sesuai saat mendaftar.");
+        return;
+    }
+
+    // Generate OTP
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    resetData = { nik: user.nik }; 
+
+    btn.innerText = "Mengirim...";
+    btn.disabled = true;
+
+    try {
+        await emailjs.send("service_digital12", "template_oumz1q9", {
+            email: user.email,
+            passcode: generatedOTP,
+            time: "15 Menit"
+        });
+
+        alert("Kode OTP berhasil dikirim ke email Anda.");
+        document.getElementById('step-cari-nik').style.display = 'none';
+        document.getElementById('forgot-ve-section').style.display = 'block';
+    } catch (error) {
+        console.error("EmailJS Error:", error);
+        alert("Gagal mengirim email.");
+        btn.innerText = "KIRIM KODE PEMULIHAN";
+        btn.disabled = false;
+    }
+}
+
+// 2. FUNGSI VERIFIKASI & UPDATE PASSWORD
+function verifyAndResetPassword() {
+    const inputOTP = document.getElementById('forgot-otp-input').value;
+    const newPass = document.getElementById('forgot-new-pass').value;
+
+    if (newPass.length < 5) {
+        alert("Kata sandi baru minimal 5 karakter!");
+        return;
+    }
+
+    if (inputOTP === generatedOTP && generatedOTP !== "") {
+        let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
+        const userIndex = dbUsers.findIndex(u => u.nik === resetData.nik);
+
+        if (userIndex !== -1) {
+            // Update password di LocalStorage
+            dbUsers[userIndex].pass = newPass;
+            localStorage.setItem('users', JSON.stringify(dbUsers));
+            
+            alert("Sandi berhasil diperbarui! Silahkan login.");
+            location.reload(); 
+        }
+    } else {
+        alert("Kode OTP salah! Periksa kembali email Anda.");
+    }
+}
+
+// 3. FUNGSI NAVIGASI TABS (Pastikan fungsi ini ada)
+function switchAuth(mode) {
+    const loginF = document.getElementById('loginForm');
+    const regF = document.getElementById('registerForm');
+    const forgotF = document.getElementById('forgotForm');
+    const tLogin = document.getElementById('t-login');
+    const tReg = document.getElementById('t-reg');
+
+    // Reset view
+    loginF.style.display = 'none';
+    regF.style.display = 'none';
+    forgotF.style.display = 'none';
+
+    if (mode === 'login') {
+        loginF.style.display = 'block';
+        tLogin.style.borderBottom = "3px solid #6a11cb";
+        tReg.style.borderBottom = "none";
+    } else if (mode === 'reg') {
+        regF.style.display = 'block';
+        tReg.style.borderBottom = "3px solid #6a11cb";
+        tLogin.style.borderBottom = "none";
+    } else if (mode === 'forgot') {
+        forgotF.style.display = 'block';
+        tLogin.style.borderBottom = "none";
+        tReg.style.borderBottom = "none";
     }
 }
 
