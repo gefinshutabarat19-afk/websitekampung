@@ -594,7 +594,6 @@
 
     
 </head>
-    <meta name="google-site-verification" content="C_sa3_ta1hRqgr8AY-okImHy2n4WEU1s5p1-eoOtOKE" />
 <body>
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
         <div id="login-page">
@@ -608,45 +607,62 @@
                 <button onclick="switchAuth('reg')" id="t-reg" style="flex:1; padding:15px; border:none; background:none; cursor:pointer; font-weight:bold; color:#7f8c8d;">DAFTAR</button>
             </div>
     
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <input type="text" placeholder="Username / NIK" required style="margin-bottom:18px;">
-                <input type="password" placeholder="Password" required style="margin-bottom:18px;">
-                <button type="submit" class="btn-submit">MASUK KE SISTEM</button>
-                <a class="forgot-link" onclick="switchAuth('forgot')" style="display:block; margin-top:20px; font-size:0.8rem; cursor:pointer; color:#666;">Lupa kata sandi?</a>
-            </form>
-
-            <form id="registerForm" style="display:none;" onsubmit="handleRegister(event)">
-            <input type="number" id="reg-nik" placeholder="NIK (16 Digit)" required style="margin-bottom:15px;">
-            <input type="text" id="reg-nama" placeholder="Nama Lengkap" required style="margin-bottom:15px;">
-            <input type="email" id="reg-email" placeholder="Alamat Email Aktif" required style="margin-bottom:15px;">
-            <input type="password" id="reg-pass" placeholder="Buat Password" required style="margin-bottom:15px;">
-        <div id="ve-section" style="display:none; background:#eef2ff; padding:15px; border-radius:12px; margin-bottom:15px; border: 1px solid #d1d5db;">
-        <p style="font-size:0.8rem; color:#4338ca; margin-bottom:10px;">Kode verifikasi telah dikirim ke email Anda.</p>
-        <input type="text" id="reg-otp-input" placeholder="Masukkan 6 Digit Kode" style="text-align:center; font-weight:bold;">
-        <button type="button" onclick="verifyOTP()" class="btn-submit" style="background:#10b981; margin-top:10px;">KONFIRMASI PENDAFTARAN</button>
+<form id="loginForm" onsubmit="handleLogin(event)">
+    <div style="margin-bottom: 20px;">
+        <input type="email" id="login-email" placeholder="Alamat Email" required 
+               style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; outline: none;">
     </div>
-    <button type="submit" id="btn-daftar-awal" class="btn-submit">KIRIM KODE KE EMAIL</button>
-                </form>
-                   <form id="forgotForm" style="display:none;" onsubmit="handleForgotPassword(event)">
-    <div id="step-cari-nik">
-        <input type="number" id="forgot-nik" placeholder="Masukkan NIK Terdaftar" required style="margin-bottom:15px;">
-        <input type="email" id="forgot-email" placeholder="Masukkan Email Terdaftar" required style="margin-bottom:20px;">
-        <button type="submit" id="btn-forgot-otp" class="btn-submit">KIRIM KODE PEMULIHAN</button>
+    <div style="margin-bottom: 10px;">
+        <input type="password" id="login-pass" placeholder="Password" required 
+               style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; outline: none;">
     </div>
-
-    <div id="forgot-ve-section" style="display:none; background:#fff7ed; padding:15px; border-radius:12px; margin-top:15px; border: 1px solid #fed7aa;">
-        <p style="font-size:0.8rem; color:#9a3412; margin-bottom:10px;">Cek email Anda untuk kode reset.</p>
-        <input type="text" id="forgot-otp-input" placeholder="6 Digit Kode OTP" style="text-align:center; font-weight:bold; margin-bottom:10px;">
-        <input type="password" id="forgot-new-pass" placeholder="Buat Kata Sandi Baru" style="margin-bottom:10px;">
-        <button type="button" onclick="verifyAndResetPassword()" class="btn-submit" style="background:#f97316;">SIMPAN SANDI BARU</button>
-    </div>
+    <p onclick="switchAuth('forgot')" style="text-align:right; font-size:0.8rem; color:#6a11cb; cursor:pointer; margin-bottom:20px; font-weight: 500;">Lupa Password?</p>
+    <button type="submit" class="btn-submit" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: var(--accent-grad); color: white; font-weight: bold; cursor: pointer;">
+        MASUK KE SISTEM
+    </button>
 </form>
-            </form>
+
+<form id="registerForm" style="display:none;" onsubmit="handleRegister(event)">
+    <input type="text" id="reg-username" placeholder="Nama" required style="margin-bottom:15px; width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+    <input type="email" id="reg-email" placeholder="Email" required style="margin-bottom:15px; width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+    <input type="password" id="reg-pass" placeholder="Password" required style="margin-bottom:15px; width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+    
+    <div id="ve-section" style="display:none; background:#f0f7ff; padding:15px; border-radius:12px; margin-bottom:15px; border: 1px solid #cbd5e1;">
+        <p style="font-size:0.8rem; color:#1e40af; margin-bottom:10px;">Kode verifikasi telah dikirim ke email.</p>
+        <input type="text" id="reg-otp-input" placeholder="6 Digit Kode" style="text-align:center; letter-spacing: 5px; font-weight:bold;">
+        <button type="button" onclick="verifyOTP()" class="btn-submit" style="background:#10b981; margin-top:10px;">KONFIRMASI</button>
+    </div>
+    <button type="submit" id="btn-daftar-awal" class="btn-submit">DAFTAR SEKARANG</button>
+</form>
+
+
+    <form id="forgotForm" style="display:none;" onsubmit="handleForgot(event)">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="color: #333;">PEMULIHAN KATA SANDI</h3>
+                    <p style="font-size: 0.8rem; color: #666;">Masukkan Nama dan Email terdaftar Anda</p>
+                </div>
+    <input type="text" id="forgot-username" placeholder="Masukkan Username Anda" required 
+           style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px;">
+    
+    <input type="email" id="forgot-email" placeholder="Alamat Email Terdaftar" required 
+           style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px;">
+    
+    <div id="reset-section" style="display:none; background:#f9fafb; padding:15px; border-radius:12px; border: 1px solid #e5e7eb; margin-top: 10px;">
+        <input type="text" id="forgot-otp-input" placeholder="Masukkan Kode OTP" 
+               style="text-align:center; font-weight:bold; margin-bottom: 10px; width: 100%;">
+        <input type="password" id="new-pass" placeholder="Password Baru" 
+               style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px;">
+        <button type="button" onclick="verifyResetOTP()" class="btn-submit" style="background:#10b981;">SIMPAN PASSWORD BARU</button>
+    </div>
+
+    <button type="submit" id="btn-forgot-awal" class="btn-submit">KIRIM KODE PEMULIHAN</button>
+    
+    <p onclick="switchAuth('login')" style="text-align:center; margin-top:15px; font-size:0.85rem; color:#6a11cb; cursor:pointer;">
+        <i class="fas fa-arrow-left"></i> Kembali ke Login
+    </p>
+</form>
         </div>
     </div>
-
-
-    
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
@@ -1844,122 +1860,118 @@ window.onafterprint = function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-
-
 let tempData = {};
 let generatedOTP = "";
-// 1. FUNGSI PENDAFTARAN & KIRIM EMAIL RIIL
+let resetData = {};
+
+// --- 1. FUNGSI PENDAFTARAN ---
 async function handleRegister(e) {
     e.preventDefault();   
     const emailValue = document.getElementById('reg-email').value;
-    const namaValue = document.getElementById('reg-nama').value;
-    const nikValue = document.getElementById('reg-nik').value;
+    const namaValue = document.getElementById('reg-username').value; // Mengambil dari id reg-username
     const passValue = document.getElementById('reg-pass').value;
-    // Cek duplikasi NIK di penyimpanan browser
+
+    // Cek apakah email sudah terdaftar
     let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
-    if(dbUsers.find(u => u.nik === nikValue)) {
-        alert("NIK ini sudah terdaftar!");
+    if(dbUsers.find(u => u.email === emailValue)) {
+        alert("Email ini sudah terdaftar!");
         return;
     }
-    // Generate 6 Digit Kode
+
+    // Generate 6 Digit OTP
     generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    tempData = { nik: nikValue, email: emailValue, nama: namaValue, pass: passValue };
-    // Tampilkan status loading pada tombol
+    tempData = { nama: namaValue, email: emailValue, pass: passValue };
+
     const btn = document.getElementById('btn-daftar-awal');
     btn.innerText = "Mengirim Kode...";
     btn.disabled = true;
-    // Format waktu untuk variabel {{time}} di template Anda
+
+    // Format waktu expiry
     const now = new Date();
-    const expiryTime = new Date(now.getTime() + 15 * 60000); // Tambah 15 menit
+    const expiryTime = new Date(now.getTime() + 15 * 60000);
     const timeString = expiryTime.getHours().toString().padStart(2, '0') + ":" + 
                        expiryTime.getMinutes().toString().padStart(2, '0');
+
     try {
-        // MENGIRIM EMAIL (Parameter disesuaikan dengan Dashboard Gefin)
+        // Menggunakan Service & Template ID Anda
         await emailjs.send("service_digital12", "template_acxs50m", {
-            email: emailValue,      // Harus 'email' agar masuk ke {{email}} di dashboard
-            passcode: generatedOTP,  // Harus 'passcode' agar masuk ke {{passcode}}
-            time: timeString        // Harus 'time' agar masuk ke {{time}}
+            email: emailValue,      
+            passcode: generatedOTP,  
+            time: timeString        
         });
         alert("Kode verifikasi telah dikirim ke: " + emailValue);
         document.getElementById('ve-section').style.display = 'block';
         btn.style.display = 'none';
     } catch (error) {
         console.error("EmailJS Error:", error);
-        alert("Gagal kirim: " + (error.text || JSON.stringify(error)));      
-        btn.innerText = "KIRIM KODE KE EMAIL";
+        alert("Gagal kirim: " + (error.text || "Periksa koneksi internet Anda"));      
+        btn.innerText = "DAFTAR SEKARANG";
         btn.disabled = false;
     }
 }
-// 2. VERIFIKASI KODE & SIMPAN DATA KE SITUS
+
+// --- 2. VERIFIKASI OTP PENDAFTARAN ---
 function verifyOTP() {
     const inputOTP = document.getElementById('reg-otp-input').value; 
     if(inputOTP === generatedOTP && generatedOTP !== "") {
         let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
         dbUsers.push(tempData);
-        // Simpan permanen di situs (LocalStorage)
+        
         localStorage.setItem('users', JSON.stringify(dbUsers));      
-        alert("Pendaftaran Berhasil! Data NIK & Sandi telah disimpan."); 
-        // Refresh halaman atau pindah ke Login
+        alert("Pendaftaran Berhasil! Silakan Login."); 
         location.reload(); 
     } else {
-        alert("Kode verifikasi salah! Silahkan periksa email Anda kembali.");
+        alert("Kode verifikasi salah!");
     }
 }
 
-
-// 3. FUNGSI LOGIN DENGAN VALIDASI DATA
+// --- 3. FUNGSI LOGIN (MENGGUNAKAN EMAIL) ---
 function handleLogin(event) {
-    event.preventDefault(); // Mencegah form reload halaman
-    // Ambil input dari form login (Pastikan ID input sesuai dengan HTML Anda)
-    // Asumsi: input pertama adalah NIK, input kedua adalah Password
-    const inputs = document.querySelectorAll('#loginForm input');
-    const inputNIK = inputs[0].value;
-    const inputPass = inputs[1].value;
-    // 1. Ambil data semua user dari LocalStorage
+    event.preventDefault();
+    const emailInput = document.getElementById('login-email').value;
+    const passInput = document.getElementById('login-pass').value;
+
     const dbUsers = JSON.parse(localStorage.getItem('users')) || [];
-    // 2. Cari user yang NIK dan Password-nya cocok dengan input
-    const userDitemukan = dbUsers.find(user => user.nik === inputNIK && user.pass === inputPass);
+    
+    // Cari berdasarkan Email dan Password
+    const userDitemukan = dbUsers.find(user => user.email === emailInput && user.pass === passInput);
+
     if (userDitemukan) {
-        // JIKA COCOK
         alert("Login Berhasil! Selamat datang, " + userDitemukan.nama);   
-        // Sembunyikan halaman login dan tampilkan dashboard
         document.getElementById('login-page').style.display = 'none';      
-        // (Opsional) Tampilkan nama user di judul dashboard
+        
         const dashboardTitle = document.getElementById('page-title');
         if(dashboardTitle) dashboardTitle.innerText = "Dashboard: " + userDitemukan.nama;
     } else {
-        // JIKA TIDAK COCOK
-        alert("Gagal Masuk: NIK atau Kata Sandi Anda salah!");
+        alert("Gagal Masuk: Email atau Password Anda salah!");
     }
 }
 
-
-let resetData = {}; // Penampung sementara data reset
-// 1. FUNGSI KIRIM OTP LUPA SANDI
-async function handleForgotPassword(e) {
+// --- 4. FUNGSI LUPA PASSWORD (MENGGUNAKAN NAMA & EMAIL) ---
+async function handleForgot(e) {
     e.preventDefault();
-    const nikInput = document.getElementById('forgot-nik').value;
-    const emailInput = document.getElementById('forgot-email').value;
-    const btn = document.getElementById('btn-forgot-otp');
-    // Ambil database user
+    const userInp = document.getElementById('forgot-username').value;
+    const emailInp = document.getElementById('forgot-email').value;
+    const btn = document.getElementById('btn-forgot-awal');
+
     let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
     
-    // Validasi: Apakah NIK dan Email cocok?
-    const user = dbUsers.find(u => u.nik === nikInput && u.email === emailInput);
+    // Validasi apakah Nama dan Email cocok
+    const user = dbUsers.find(u => u.nama === userInp && u.email === emailInp);
 
     if (!user) {
-        alert("Data tidak ditemukan! Pastikan NIK dan Email sesuai saat mendaftar.");
+        alert("Data tidak ditemukan! Pastikan Nama dan Email sesuai.");
         return;
     }
 
-    // Generate OTP
     generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    resetData = { nik: user.nik }; 
+    resetData = { email: user.email }; 
 
     btn.innerText = "Mengirim...";
     btn.disabled = true;
 
     try {
+        // Menggunakan Template Lupa Password Anda
         await emailjs.send("service_digital12", "template_oumz1q9", {
             email: user.email,
             passcode: generatedOTP,
@@ -1967,71 +1979,59 @@ async function handleForgotPassword(e) {
         });
 
         alert("Kode OTP berhasil dikirim ke email Anda.");
-        document.getElementById('step-cari-nik').style.display = 'none';
-        document.getElementById('forgot-ve-section').style.display = 'block';
+        document.getElementById('reset-section').style.display = 'block';
+        btn.style.display = 'none';
     } catch (error) {
-        console.error("EmailJS Error:", error);
         alert("Gagal mengirim email.");
         btn.innerText = "KIRIM KODE PEMULIHAN";
         btn.disabled = false;
     }
 }
 
-// 2. FUNGSI VERIFIKASI & UPDATE PASSWORD
-function verifyAndResetPassword() {
+// --- 5. VERIFIKASI & UPDATE PASSWORD BARU ---
+function verifyResetOTP() {
     const inputOTP = document.getElementById('forgot-otp-input').value;
-    const newPass = document.getElementById('forgot-new-pass').value;
+    const newPass = document.getElementById('new-pass').value;
 
     if (newPass.length < 5) {
-        alert("Kata sandi baru minimal 5 karakter!");
+        alert("Password baru minimal 5 karakter!");
         return;
     }
 
     if (inputOTP === generatedOTP && generatedOTP !== "") {
         let dbUsers = JSON.parse(localStorage.getItem('users')) || [];
-        const userIndex = dbUsers.findIndex(u => u.nik === resetData.nik);
+        const userIndex = dbUsers.findIndex(u => u.email === resetData.email);
 
         if (userIndex !== -1) {
-            // Update password di LocalStorage
             dbUsers[userIndex].pass = newPass;
             localStorage.setItem('users', JSON.stringify(dbUsers));
             
-            alert("Sandi berhasil diperbarui! Silahkan login.");
+            alert("Password berhasil diperbarui!");
             location.reload(); 
         }
     } else {
-        alert("Kode OTP salah! Periksa kembali email Anda.");
+        alert("Kode OTP salah!");
     }
 }
 
-// 3. FUNGSI NAVIGASI TABS (Pastikan fungsi ini ada)
+// --- 6. NAVIGASI TABS ---
 function switchAuth(mode) {
     const loginF = document.getElementById('loginForm');
     const regF = document.getElementById('registerForm');
     const forgotF = document.getElementById('forgotForm');
-    const tLogin = document.getElementById('t-login');
-    const tReg = document.getElementById('t-reg');
 
-    // Reset view
     loginF.style.display = 'none';
     regF.style.display = 'none';
     forgotF.style.display = 'none';
 
     if (mode === 'login') {
         loginF.style.display = 'block';
-        tLogin.style.borderBottom = "3px solid #6a11cb";
-        tReg.style.borderBottom = "none";
     } else if (mode === 'reg') {
         regF.style.display = 'block';
-        tReg.style.borderBottom = "3px solid #6a11cb";
-        tLogin.style.borderBottom = "none";
     } else if (mode === 'forgot') {
         forgotF.style.display = 'block';
-        tLogin.style.borderBottom = "none";
-        tReg.style.borderBottom = "none";
     }
 }
-
     </script>
 </body>
 </html>
